@@ -3,22 +3,19 @@
 ## Overview
 
 The multicam sample demonstrates the ability to use the SDK for streaming and rendering multiple devices simultaneously.
+The original sample is modified to work with Framos D435e cameras in the following way: options RS2_OPTION_INTER_PACKET_DELAY and RS2_OPTION_PACKET_SIZE are set to assure stable streams, and only Depth and Color streams are enabled with profile 640x480@30fps on both streams. The sample expects two D435e cameras that are streaming to same NIC (Network Interface Card) on PC. The sample will detect and stream from Intel D400 series cameras as well. The sample was tested with two Framos D435e and one Intel D435i camera.
 
 ## Expected Output
 
-The application opens and renders a mosaic view of all automatically-selected streams provided by the connected devices. (The selection is device-tailored and takes into account USB-type constrains).
-Each tile displays an unique stream produced by a specific camera. The stream name appear at the top left.
+The application opens and renders a mosaic view of Depth and Color streams provided by the connected devices. Each tile displays an unique stream produced by a specific camera. The stream name appear at the top left.
 
-In the following snapshot we use five Intel® RealSense™ devices to produce the mosaic: D435i, D415, SR300 and two T265 tracking cameras. Those are responsible to generate:
- - Three Depth streams (D435i, D415, SR300)
- - Three Color streams (D435i, D415, SR300)
- - Two Pose streams (T265x2)
- - Four Fisheye streams (T265x2)
- - Six IMU streams (D435i, T265x2)  
+In the following snapshot we use two Framos D435e and one Intel D435i camera. Those are responsible to generate:
+ - Three Depth streams (2x D435e, D435i)
+ - Three Color streams (2x D435e, D435i)
 
- Alltogether the mosaic comprise of 18 simultaneous live feeds:
+Altogether the mosaic comprise of 6 simultaneous live feeds:
 
-<p align="center"><img src="https://raw.githubusercontent.com/wiki/IntelRealSense/librealsense/res/Multicam.gif" alt="screenshot gif"/></p>
+<p align="center"><img src="./multicam_screenshot.png" alt="screenshot gif"/></p>
 
 
 ## Code Overview
@@ -59,16 +56,31 @@ std::vector<rs2::pipeline>            pipelines;
 The `rs2::context` encapsulates all of the devices and sensors, and provides some additional functionalities. We employ the `rs2::colorizer ` to convert depth data to RGB format.
 In the example we use multiple `rs2::pipeline` objects, each controlling a lifetime of a single HW device. Similarly, we initialize a separate `rs2::colorizer` object for each device. We keep a mapping from the device's serial number to it's `rs2::colorizer` object, this way we'll be able to apply the correct `rs2::colorizer` to each frame.
 
-The example's flow starts with listing and activating all the connected Intel® RealSense™ devices:
+The example's flow starts with setting packet size and inter packet delay for Framos D435e cameras. Optimal Inter Packet Delay value is calculted based on number of parallel streams and packet size.
+```cpp
+    float interPacketDelay = getOptimalInterPacketDelay(numParallelStreams, packetSize);
+
+    sensor.set_option(RS2_OPTION_PACKET_SIZE, packetSize);
+    sensor.set_option(RS2_OPTION_INTER_PACKET_DELAY, interPacketDelay);
+```
+
+The example's flow then continues with listing and activating all the connected Intel® RealSense™ devices:
 ```cpp
 // Start a streaming pipe per each connected device
 for (auto&& dev : ctx.query_devices())
 {
     rs2::pipeline pipe(ctx);
     rs2::config cfg;
+    
+    // enable only depth and color streams
+    cfg.enable_stream(RS2_STREAM_DEPTH, -1, 640, 480, RS2_FORMAT_Z16, 30);
+    cfg.enable_stream(RS2_STREAM_COLOR, -1, 640, 480, RS2_FORMAT_RGB8, 30);
+
     cfg.enable_device(dev.get_info(RS2_CAMERA_INFO_SERIAL_NUMBER));
     pipe.start(cfg);
     pipelines.emplace_back(pipe);
+    // Map from each device's serial number to a different colorizer
+    colorizers[dev.get_info(RS2_CAMERA_INFO_SERIAL_NUMBER)] = rs2::colorizer();
 }
 ```
 
@@ -76,8 +88,7 @@ First, we allocate `rs2::pipeline` object per recognized device. Note that we sh
 ```cpp
 rs2::pipeline pipe(ctx);
 ```
-To map the specific device to the newly-allocated pipeline we define `rs2::config` object, and assign it with the device's serial number.  
-Then we request `rs::pipeline` to start streaming and produce frames.
+To map the specific device to the newly-allocated pipeline we define `rs2::config` object, and assign it with the device's serial number. Only Depth and Color streams with profile 640x480@30fps are enabled. Then we request `rs::pipeline` to start streaming and produce frames.
 ```cpp
 pipe.start(cfg);
 ```

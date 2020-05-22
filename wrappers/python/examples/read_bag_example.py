@@ -3,8 +3,6 @@
 #####################################################
 
 
-# First import library
-import pyrealsense2 as rs
 # Import Numpy for easy array manipulation
 import numpy as np
 # Import OpenCV for easy image rendering
@@ -13,6 +11,8 @@ import cv2
 import argparse
 # Import os.path for file path manipulation
 import os.path
+# First import library
+import pyrealsense2 as rs
 
 # Create object for parsing command-line options
 parser = argparse.ArgumentParser(description="Read recorded bag file and display depth stream in jet colormap.\

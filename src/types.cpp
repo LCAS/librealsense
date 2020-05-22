@@ -285,6 +285,11 @@ namespace librealsense
             CASE(ENABLE_POSE_JUMPING)
             CASE(ENABLE_DYNAMIC_CALIBRATION)
             CASE(DEPTH_OFFSET)
+            CASE(INTER_PACKET_DELAY)
+            CASE(PACKET_SIZE)
+            CASE(SOFTWARE_TRIGGER)
+            CASE(EXT_TRIGGER_SOURCE)
+            CASE(SOFTWARE_TRIGGER_ALL_SENSORS)
         default: assert(!is_valid(value)); return UNKNOWN_VALUE;
         }
 #undef CASE
@@ -347,6 +352,7 @@ namespace librealsense
             CASE(NAME)
             CASE(SERIAL_NUMBER)
             CASE(FIRMWARE_VERSION)
+            CASE(DEVICE_VERSION)
             CASE(RECOMMENDED_FIRMWARE_VERSION)
             CASE(PHYSICAL_PORT)
             CASE(DEBUG_OP_CODE)
@@ -357,6 +363,8 @@ namespace librealsense
             CASE(USB_TYPE_DESCRIPTOR)
             CASE(ASIC_SERIAL_NUMBER)
             CASE(FIRMWARE_UPDATE_ID)
+            CASE(IP_ADDRESS)
+            CASE(SUBNET_MASK)
         default: assert(!is_valid(value)); return UNKNOWN_VALUE;
         }
 #undef CASE

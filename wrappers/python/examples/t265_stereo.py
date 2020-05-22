@@ -31,13 +31,14 @@ $ source py3librs/bin/activate  # Activate the virtual environment
 $ python3 t265_stereo.py        # Run the example
 """
 
-# First import the library
-import pyrealsense2 as rs
 
 # Import OpenCV and numpy
 import cv2
 import numpy as np
 from math import tan, pi
+
+# Import the library
+import pyrealsense2 as rs
 
 """
 In this section, we will set up the functions that will translate the camera

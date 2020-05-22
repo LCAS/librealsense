@@ -65,7 +65,7 @@ namespace librealsense
     void hw_monitor::execute_usb_command(uint8_t *out, size_t outSize, uint32_t & op, uint8_t * in, size_t & inSize) const
     {
         std::vector<uint8_t> out_vec(out, out + outSize);
-        auto res = _locked_transfer->send_receive(out_vec);
+        auto res = send(out_vec);
 
         // read
         if (in && inSize)
@@ -114,7 +114,15 @@ namespace librealsense
 
     std::vector<uint8_t> hw_monitor::send(std::vector<uint8_t> data) const
     {
-        return _locked_transfer->send_receive(data);
+        if (_locked_transfer) return _locked_transfer->send_receive(data);
+        else
+        {
+            return static_cast<std::vector<uint8_t>>(_ep->invoke_powered(
+                    [this, &data](platform::cs_device& dev)
+                    {
+                        return dev.send_hwm(data);
+                    }));
+        }
     }
 
     std::vector<uint8_t> hw_monitor::send(command cmd) const

@@ -84,8 +84,8 @@ librealsense-log.txt
 *.check_cache
 *.dll
 *.list
-*.json
+#*.json
 *.ini
 *.cxx
 
-.vscode/*
+#.vscode/*

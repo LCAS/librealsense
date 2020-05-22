@@ -126,6 +126,7 @@ void init_sensor(py::module &m);
 void init_device(py::module &m);
 void init_record_playback(py::module &m);
 void init_context(py::module &m);
+void init_d400e(py::module& m);
 void init_pipeline(py::module &m);
 void init_internal(py::module &m);
 void init_export(py::module &m);

@@ -23,6 +23,11 @@ namespace librealsense
 
             std::shared_ptr<hid_device> create_hid_device(hid_device_info info) const override;
             std::vector<hid_device_info> query_hid_devices() const override;
+
+#ifndef SKIP_CS_SUPPORT
+            std::shared_ptr<cs_device> create_cs_device(cs_device_info info) const override;
+#endif
+            std::vector<cs_device_info> query_cs_devices() const override;
             virtual std::shared_ptr<time_service> create_time_service() const override;
             std::shared_ptr<device_watcher> create_device_watcher() const override;
             std::string get_device_serial(uint16_t device_vid, uint16_t device_pid, const std::string& device_uid) const override;

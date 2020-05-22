@@ -64,6 +64,9 @@ extern "C" {
         RS2_OPTION_STEREO_BASELINE, /**< The distance in mm between the first and the second imagers in stereo-based depth cameras*/
         RS2_OPTION_AUTO_EXPOSURE_CONVERGE_STEP, /**< Allows dynamically ajust the converge step value of the target exposure in Auto-Exposure algorithm*/
         RS2_OPTION_INTER_CAM_SYNC_MODE, /**< Impose Inter-camera HW synchronization mode. Applicable for D400/Rolling Shutter SKUs */
+        RS2_OPTION_EXT_TRIGGER_SOURCE, /**Select external trigger type for eth cameras*/
+        RS2_OPTION_SOFTWARE_TRIGGER, /**< Execute software trigger for eth cameras*/
+        RS2_OPTION_SOFTWARE_TRIGGER_ALL_SENSORS, /**< Execute software trigger for eth cameras*/
         RS2_OPTION_STREAM_FILTER, /**< Select a stream to process */
         RS2_OPTION_STREAM_FORMAT_FILTER, /**< Select a stream format to process */
         RS2_OPTION_STREAM_INDEX_FILTER, /**< Select a stream index to process */
@@ -81,6 +84,8 @@ extern "C" {
         RS2_OPTION_ENABLE_POSE_JUMPING, /**< Enable position jumping */
         RS2_OPTION_ENABLE_DYNAMIC_CALIBRATION, /**< Enable dynamic calibration */
         RS2_OPTION_DEPTH_OFFSET, /**< Offset from sensor to depth origin in millimetrers*/
+        RS2_OPTION_INTER_PACKET_DELAY, /**< Inter-packet delay for eth cameras*/
+        RS2_OPTION_PACKET_SIZE, /**< Packet size for eth cameras*/
         RS2_OPTION_COUNT /**< Number of enumeration values. Not a valid input: intended to be used in for-loops. */
     } rs2_option;
 

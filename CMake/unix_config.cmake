@@ -38,6 +38,9 @@ macro(os_set_flags)
     else()
         set(BACKEND RS2_USE_V4L2_BACKEND)
     endif()
+
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 endmacro()
 
 macro(os_target_config)

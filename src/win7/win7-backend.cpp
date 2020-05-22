@@ -17,6 +17,7 @@
 #include <Windows.h>
 #include <dbt.h>
 #include <cctype> // std::tolower
+#include "cs/cs-factory.h"
 
 #ifndef KSCATEGORY_SENSOR_CAMERA
 DEFINE_GUIDSTRUCT("24E552D7-6523-47F7-A647-D3465BF1F5CA", KSCATEGORY_SENSOR_CAMERA);
@@ -86,6 +87,16 @@ namespace librealsense
             std::vector<hid_device_info> devices;
             // Not supported 
             return devices;
+        }
+
+        std::shared_ptr<cs_device> win7_backend::create_cs_device(cs_device_info info) const
+        {
+            return std::make_shared<platform::cs_device>(info);
+        }
+
+        std::vector<cs_device_info> win7_backend::query_cs_devices() const
+        {
+            return cs_info::query_cs_devices();
         }
 
         std::shared_ptr<time_service> win7_backend::create_time_service() const

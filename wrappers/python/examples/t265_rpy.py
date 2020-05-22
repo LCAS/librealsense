@@ -7,11 +7,11 @@
 ##           librealsense T265 rpy example         ##
 #####################################################
 
-# First import the library
-import pyrealsense2 as rs
+# Import the library
 import numpy as np
 import transformations as tf
 import math as m
+import pyrealsense2 as rs
 
 H_aeroRef_T265Ref = np.array([[0,0,-1,0],[1,0,0,0],[0,-1,0,0],[0,0,0,1]])
 H_T265body_aeroBody = np.linalg.inv(H_aeroRef_T265Ref)

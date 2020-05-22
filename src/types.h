@@ -1310,6 +1310,35 @@ namespace librealsense
             (a.device_path == b.device_path);
     }
 
+    struct cs_device_info
+    {
+        std::string id;
+        uint16_t vid = 0;
+        std::string info;
+        std::string serial;
+
+        operator std::string()
+        {
+            std::stringstream s;
+
+            s << "info- " << info <<
+              "\nid- " << id <<
+                             "\nvid- " << std::hex << vid <<
+              "\nserial- " << serial;
+
+            return s.str();
+        }
+    };
+
+    inline bool operator==(const cs_device_info& a,
+                           const cs_device_info& b)
+    {
+        return  (a.id == b.id) &&
+                (a.vid == b.vid) &&
+                (a.serial == b.serial) &&
+                (a.info == b.info);
+    }
+
 
     struct devices_data
     {
@@ -1322,13 +1351,18 @@ namespace librealsense
         devices_data(std::vector<uvc_device_info> uvc_devices, std::vector<usb_device_info> usb_devices)
             :_uvc_devices(uvc_devices), _usb_devices(usb_devices) {}
 
+        devices_data(std::vector<uvc_device_info>  uvc_devices, std::vector<usb_device_info> usb_devices, std::vector<hid_device_info> hid_devices, std::vector<cs_device_info> cs_devices)
+                :_uvc_devices(uvc_devices), _usb_devices(usb_devices), _hid_devices(hid_devices), _cs_devices(cs_devices) {}
+
         std::vector<uvc_device_info> _uvc_devices;
         std::vector<usb_device_info> _usb_devices;
         std::vector<hid_device_info> _hid_devices;
+        std::vector<cs_device_info> _cs_devices;
 
         bool operator == (const devices_data& other)
         {
             return !list_changed(_uvc_devices, other._uvc_devices) &&
+                   !list_changed(_cs_devices, other._cs_devices) &&
                 !list_changed(_hid_devices, other._hid_devices);
         }
 
@@ -1353,6 +1387,13 @@ namespace librealsense
             for (auto hid : _hid_devices)
             {
                 s += hid;
+                s += "\n\n";
+            }
+
+            s += _cs_devices.size()>0 ? "cs devices: \n" : "";
+            for (auto cs : _cs_devices)
+            {
+                s += cs;
                 s += "\n\n";
             }
             return s;
@@ -1520,9 +1561,11 @@ namespace librealsense
         {
             if(cancellable_timer.try_sleep(5000))
             {
-                platform::backend_device_group curr(_backend->query_uvc_devices(), _backend->query_usb_devices(), _backend->query_hid_devices());
+                platform::backend_device_group curr(_backend->query_uvc_devices(), _backend->query_usb_devices(),
+                                                    _backend->query_hid_devices(), _backend->query_cs_devices());
                 if(list_changed(_devices_data.uvc_devices, curr.uvc_devices ) ||
                    list_changed(_devices_data.usb_devices, curr.usb_devices ) ||
+                   list_changed(_devices_data.cs_devices, curr.cs_devices ) ||
                    list_changed(_devices_data.hid_devices, curr.hid_devices ))
                 {
                     callback_invocation_holder callback = { _callback_inflight.allocate(), &_callback_inflight };
@@ -1541,7 +1584,8 @@ namespace librealsense
             _callback = std::move(callback);
             _devices_data = {   _backend->query_uvc_devices(),
                                 _backend->query_usb_devices(),
-                                _backend->query_hid_devices() };
+                                _backend->query_hid_devices(),
+                                _backend->query_cs_devices()};
 
             _active_object.start();
         }

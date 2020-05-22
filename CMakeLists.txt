@@ -22,9 +22,10 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/CMake)
 # include librealsense general configuration
 include(CMake/global_config.cmake)
 
+# include librealsense camerasuite configuration
+include(CMake/camera_suite.cmake)
 
 config_cxx_flags()
-
 # include os specific macros
 # macro definition located at "CMake/global_config.cmake"
 include(CMake/include_os.cmake)
@@ -58,6 +59,17 @@ os_target_config()
 # macro definition located at "CMake/global_config.cmake"
 global_target_config()
 
+# add camera suite configuration flags
+# macro definition located at "CMake/camera_suite.cmake"
+add_camerasuite(${LRS_TARGET})
+
+include(install_options.cmake OPTIONAL)
+if(INSTALL_DYNAMIC_CALIBRATOR)
+    include(install_dynamic_calibrator.cmake)
+endif()
+if(INSTALL_ROS_WRAPPER)
+    include(install_ros_wrapper.cmake)
+endif()
 include(CMake/install_config.cmake)
 
 add_subdirectory(wrappers)
@@ -66,7 +78,8 @@ if (BUILD_EXAMPLES AND BUILD_GLSL_EXTENSIONS)
     find_package(glfw3 3.3 QUIET)
     if(NOT TARGET glfw)
         message(STATUS "GLFW 3.3 not found; using internal version")
-        set(GLFW_INSTALL ON CACHE BOOL "" FORCE)
+        #this forces installation of glfw3 headers, conflicting with libglfw3-dev package
+        #set(GLFW_INSTALL ON CACHE BOOL "" FORCE)
         add_subdirectory(third-party/glfw)
     endif()
     add_subdirectory(src/gl)

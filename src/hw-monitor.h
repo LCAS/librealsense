@@ -4,6 +4,7 @@
 #pragma once
 
 #include "sensor.h"
+#include "cs/cs-sensor.h"
 #include <mutex>
 #include "command_transfer.h"
 
@@ -314,9 +315,16 @@ namespace librealsense
         void send_hw_monitor_command(hwmon_cmd_details& details) const;
 
         std::shared_ptr<locked_transfer> _locked_transfer;
+        cs_sensor* _ep;
     public:
         explicit hw_monitor(std::shared_ptr<locked_transfer> locked_transfer)
-            : _locked_transfer(std::move(locked_transfer))
+            : _locked_transfer(std::move(locked_transfer)),
+              _ep(nullptr)
+        {}
+
+        explicit hw_monitor(cs_sensor* ep)
+                : _ep(std::move(ep)),
+                  _locked_transfer(nullptr)
         {}
 
         std::vector<uint8_t> send(std::vector<uint8_t> data) const;

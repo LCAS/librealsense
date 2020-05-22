@@ -25,6 +25,50 @@ install(TARGETS ${LRS_TARGET}
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2"
 )
 
+if (UNIX)
+    set(SOURCE_DEST src/librealsense2)
+elseif (WIN32)
+    set(SOURCE_DEST src)
+else()
+    set(SOURCE_DEST .)
+endif()
+
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/.github DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/CMake DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/common DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/config DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/doc DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/examples DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/scripts DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/src DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/third-party DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/tools DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/unit-tests DESTINATION ${SOURCE_DEST})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/wrappers DESTINATION ${SOURCE_DEST})
+install(FILES 
+    ${PROJECT_SOURCE_DIR}/.gitignore 
+    ${PROJECT_SOURCE_DIR}/.travis.yml 
+    ${PROJECT_SOURCE_DIR}/appveyor.yml
+    ${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake
+    ${PROJECT_SOURCE_DIR}/CMakeLists.txt
+    ${PROJECT_SOURCE_DIR}/code-of-conduct.md
+    ${PROJECT_SOURCE_DIR}/CONTRIBUTING.md
+    ${PROJECT_SOURCE_DIR}/LICENSE
+    ${PROJECT_SOURCE_DIR}/NOTICE
+    ${PROJECT_SOURCE_DIR}/package.xml
+    ${PROJECT_SOURCE_DIR}/readme.md
+    ${PROJECT_SOURCE_DIR}/d400e_api_extensions.md
+    DESTINATION ${SOURCE_DEST}
+)
+
+if (UNIX)
+    install(FILES
+        ${PROJECT_SOURCE_DIR}/config/99-realsense-libusb.rules 
+        DESTINATION /etc/udev/rules.d/
+    )
+endif()
+
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/librealsense2
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
@@ -43,9 +87,26 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/realsense2ConfigVersion.cmake"
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
+install(CODE "execute_process(COMMAND ldconfig)")
+
 # Set library pkgconfig file for facilitating 3rd party integration
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/config/realsense2.pc"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
 )
 
-install(CODE "execute_process(COMMAND ldconfig)")
+set(CPACK_PACKAGE_NAME "FRAMOS-librealsense2")
+set(CPACK_DEBIAN_PACKAGE_RECOMMENDS "freeglut3")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "FRAMOS GmbH")
+set(CPACK_PACKAGE_VERSION_MAJOR 2)
+set(CPACK_PACKAGE_VERSION_MINOR 29)
+set(CPACK_PACKAGE_VERSION_PATCH 8)
+
+# Workaround for path length limitation of NSIS (260 characters)
+if (WIN32)
+    set(CPACK_PACKAGE_DIRECTORY C:/temp)
+    set(CPACK_OUTPUT_FILE_PREFIX ${PROJECT_BINARY_DIR})
+endif()
+
+set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA ${PROJECT_SOURCE_DIR}/postinst)
+
+include(CPack)

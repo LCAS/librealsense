@@ -20,12 +20,16 @@
 #include "stream.h"
 #include "environment.h"
 #include "context.h"
+#include "d400e.h"
+#include "cs/cs-factory.h"
 #include "fw-update/fw-update-factory.h"
 
 #ifdef WITH_TRACKING
 #include "tm2/tm-context.h"
 #include "tm2/tm-info.h"
 #endif
+
+int librealsense::context::_objects_count = 0;
 
 template<unsigned... Is> struct seq{};
 template<unsigned N, unsigned... Is>
@@ -74,6 +78,13 @@ bool contains(const std::shared_ptr<librealsense::device_info>& first,
             second_data.hid_devices.end())
             return false;
     }
+    for (auto&& cs : first_data.cs_devices)
+    {
+        if (std::find(second_data.cs_devices.begin(),
+                      second_data.cs_devices.end(), cs) ==
+            second_data.cs_devices.end())
+            return false;
+    }
     for (auto&& pd : first_data.playback_devices)
     {
         if (std::find(second_data.playback_devices.begin(),
@@ -101,6 +112,17 @@ namespace librealsense
         : _devices_changed_callback(nullptr, [](rs2_devices_changed_callback*){})
     {
         LOG_DEBUG("Librealsense " << std::string(std::begin(rs2_api_version),std::end(rs2_api_version)));
+
+        if (_objects_count == 0) {
+            smcs::InitCameraAPI();
+            auto smcs_api = smcs::GetCameraAPI();
+            auto node = smcs_api->GetApiParametersNode("PacketResendGroupSize");
+            if (node != nullptr) {
+                node->SetIntegerNodeValue(CS_PACKET_RESEND_GROUP_MAX_SIZE);
+            }
+            //heartbeat time set to default on the first call to get_instance()
+            d400e::heartbeat_time::get_instance();
+        }
 
         switch(type)
         {
@@ -132,6 +154,8 @@ namespace librealsense
        environment::get_instance().set_time_service(_backend->create_time_service());
 
        _device_watcher = _backend->create_device_watcher();
+
+       _objects_count++;
     }
 
 
@@ -306,15 +330,19 @@ namespace librealsense
     context::~context()
     {
         _device_watcher->stop(); //ensure that the device watcher will stop before the _devices_changed_callback will be deleted
+
+        if (_objects_count > 0) _objects_count--;
+        if (_objects_count == 0) smcs::ExitCameraAPI();
     }
 
     std::vector<std::shared_ptr<device_info>> context::query_devices(int mask) const
     {
 
-        platform::backend_device_group devices(_backend->query_uvc_devices(), _backend->query_usb_devices(), _backend->query_hid_devices());
+        platform::backend_device_group devices(_backend->query_uvc_devices(), _backend->query_usb_devices(), _backend->query_hid_devices(), _backend->query_cs_devices());
 #ifdef WITH_TRACKING
         if (_tm2_context) _tm2_context->create_manager();
 #endif
+
         return create_devices(devices, _playback_devices, mask);
     }
 
@@ -361,6 +389,12 @@ namespace librealsense
         {
             auto uvc_devices = platform_camera_info::pick_uvc_devices(ctx, devices.uvc_devices);
             std::copy(begin(uvc_devices), end(uvc_devices), std::back_inserter(list));
+        }
+
+        if (mask & RS2_PRODUCT_LINE_CS)
+        {
+            auto cs_devices = cs_info::pick_cs_devices(ctx, devices.cs_devices);
+            std::copy(begin(cs_devices), end(cs_devices), std::back_inserter(list));
         }
 
         for (auto&& item : playback_devices)

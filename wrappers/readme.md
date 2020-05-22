@@ -2,7 +2,7 @@
 
 * [Python](./python/) - Supports both Python 2 and 3
 * [Node.js](./nodejs) - Support Node.js v6 above
-* [ROS](https://github.com/intel-ros/realsense/releases) - Integration with Robot Operating System
+* [ROS](./ros) - Integration with Robot Operating System
 * [LabVIEW](./labview) - Integration with National Instruments LabVIEW
 * [OpenCV](./opencv) - Integration with OpenCV computer-vision library
 * [PCL](./pcl) - Basic integration with the Point-Cloud Library

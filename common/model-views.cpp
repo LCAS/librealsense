@@ -3256,9 +3256,18 @@ namespace rs2
         for (auto&& f : first)
         {
             auto first_uid = f.get_profile().unique_id();
-            if (auto second_f = second.first_or_default(f.get_profile().stream_type()))
+            auto type = f.get_profile().stream_type();
+            auto index = f.get_profile().stream_index();
+            auto second_f = std::find_if(
+                second.begin(), second.end(), 
+                [type, index](const rs2::frame& frame) {
+                    auto profile = frame.get_profile();
+                    return profile.stream_type() == type && profile.stream_index() == index;
+                }
+            );
+            if (second_f != second.end())
             {
-                auto second_uid = second_f.get_profile().unique_id();
+                auto second_uid = (*second_f).get_profile().unique_id();
 
                 viewer.streams_origin[first_uid] = second_uid;
                 viewer.streams_origin[second_uid] = first_uid;

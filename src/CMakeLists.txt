@@ -12,6 +12,7 @@ include(${_rel_path}/res/CMakeLists.txt)
 include(${_rel_path}/pipeline/CMakeLists.txt)
 include(${_rel_path}/usb/CMakeLists.txt)
 include(${_rel_path}/fw-update/CMakeLists.txt)
+include(${_rel_path}/cs/CMakeLists.txt)
 
 message(STATUS "using ${BACKEND}")
 
@@ -71,6 +72,7 @@ target_sources(${LRS_TARGET}
         "${CMAKE_CURRENT_LIST_DIR}/archive.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/backend.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/context.cpp"
+		"${CMAKE_CURRENT_LIST_DIR}/d400e.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/device.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/device_hub.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/environment.cpp"
@@ -97,6 +99,7 @@ target_sources(${LRS_TARGET}
         "${CMAKE_CURRENT_LIST_DIR}/backend.h"
         "${CMAKE_CURRENT_LIST_DIR}/concurrency.h"
         "${CMAKE_CURRENT_LIST_DIR}/context.h"
+		"${CMAKE_CURRENT_LIST_DIR}/d400e.h"
         "${CMAKE_CURRENT_LIST_DIR}/device.h"
         "${CMAKE_CURRENT_LIST_DIR}/device_hub.h"
         "${CMAKE_CURRENT_LIST_DIR}/environment.h"

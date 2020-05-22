@@ -20,6 +20,7 @@ PYBIND11_MODULE(NAME, m) {
     init_device(m);
     init_record_playback(m);
     init_context(m);
+    init_d400e(m);
     init_pipeline(m);
     init_internal(m);
     init_export(m);
