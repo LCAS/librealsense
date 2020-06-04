@@ -29,6 +29,7 @@
   <build_depend>pkg-config</build_depend>
 
   <depend>libusb-1.0-dev</depend>
+  <depend>gtk3</depend>
   <depend>linux-headers-generic</depend>
   <depend>libssl-dev</depend>
   <depend>dkms</depend>
