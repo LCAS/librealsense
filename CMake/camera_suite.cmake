@@ -1,6 +1,6 @@
 macro(add_camerasuite)
 	string (REPLACE "\\" "/" CAMERA_SUITE_MODULE_PATH "$ENV{CAMERA_SUITE_PACKAGE}")
-    list (APPEND CMAKE_MODULE_PATH "${CAMERA_SUITE_MODULE_PATH}")
+    list (APPEND CMAKE_MODULE_PATH "${CAMERA_SUITE_MODULE_PATH}" /usr/src/framos/camerasuite/CMakePackages)
     find_package(CameraSuite REQUIRED)
     include_directories(${CAMERASUITE_INCLUDE_DIRS})
     target_sources(${ARGV0} PRIVATE "${CAMERASUITE_INCLUDE_DIRS}/smcs_cpp/CameraSDK.cpp")
