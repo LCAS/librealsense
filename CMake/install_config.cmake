@@ -25,49 +25,12 @@ install(TARGETS ${LRS_TARGET}
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2"
 )
 
-if (UNIX)
-    set(SOURCE_DEST src/librealsense2)
-elseif (WIN32)
-    set(SOURCE_DEST src)
-else()
-    set(SOURCE_DEST .)
-endif()
-
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/.github DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/CMake DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/common DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/config DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/doc DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/examples DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/scripts DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/src DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/third-party DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/tools DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/unit-tests DESTINATION ${SOURCE_DEST})
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/wrappers DESTINATION ${SOURCE_DEST})
-install(FILES 
-    ${PROJECT_SOURCE_DIR}/.gitignore 
-    ${PROJECT_SOURCE_DIR}/.travis.yml 
-    ${PROJECT_SOURCE_DIR}/appveyor.yml
-    ${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake
-    ${PROJECT_SOURCE_DIR}/CMakeLists.txt
-    ${PROJECT_SOURCE_DIR}/code-of-conduct.md
-    ${PROJECT_SOURCE_DIR}/CONTRIBUTING.md
-    ${PROJECT_SOURCE_DIR}/LICENSE
-    ${PROJECT_SOURCE_DIR}/NOTICE
-    ${PROJECT_SOURCE_DIR}/package.xml
-    ${PROJECT_SOURCE_DIR}/readme.md
-    ${PROJECT_SOURCE_DIR}/d400e_api_extensions.md
-    DESTINATION ${SOURCE_DEST}
-)
-
-if (UNIX)
-    install(FILES
-        ${PROJECT_SOURCE_DIR}/config/99-realsense-libusb.rules 
-        DESTINATION /etc/udev/rules.d/
-    )
-endif()
+#if (UNIX)
+#    install(FILES
+#        ${PROJECT_SOURCE_DIR}/config/99-realsense-libusb.rules 
+#        DESTINATION /etc/udev/rules.d/
+#    )
+#endif()
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/librealsense2
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
