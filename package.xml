@@ -35,6 +35,7 @@
   <depend>dkms</depend>
   <depend>udev</depend>
   <depend>framoscamerasuite</depend>
+  <depend>libglfw3-dev</depend>
 
   <export>
     <build_type>cmake</build_type>

@@ -18,7 +18,7 @@ if(ENABLE_CCACHE)
 endif()
 
 macro(global_set_flags)
-    set(LRS_TARGET realsense2)
+    set(LRS_TARGET realsense2-framos)
     set(LRS_LIB_NAME ${LRS_TARGET})
 
     add_definitions(-DELPP_THREAD_SAFE)
