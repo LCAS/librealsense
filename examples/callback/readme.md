@@ -14,7 +14,7 @@ This sample prints a frame counter for each stream, the code demonstrates how it
 First, we include the Intel® RealSense™ Cross-Platform API.  
 All but advanced functionality is provided through a single header:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 We define frame counters that will be updated every time a frame arrives.

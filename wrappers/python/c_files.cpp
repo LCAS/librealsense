@@ -2,7 +2,7 @@
 Copyright(c) 2017 Intel Corporation. All Rights Reserved. */
 
 #include "python.hpp"
-#include "../include/librealsense2/rs.h"
+#include "../include/librealsense2-framos/rs.h"
 
 std::string make_pythonic_str(std::string str)
 {

@@ -20,9 +20,9 @@ This is not strictly part of core RealSense functionality, but rather a useful e
 
 ### Setup
 
-To enable this functionality, in addition to standard `#include <librealsense2/rs.hpp>` you need to include:
+To enable this functionality, in addition to standard `#include <librealsense2-framos/rs.hpp>` you need to include:
 ```cpp
-#include <librealsense2-gl/rs_processing_gl.hpp> // Include GPU-Processing API
+#include <librealsense2-framos-gl/rs_processing_gl.hpp> // Include GPU-Processing API
 ```
 
 > In order to allow texture sharing between processing and rendering application, `rs_processing_gl.hpp` needs to be included **after** including `GLFW`.

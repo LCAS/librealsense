@@ -2,10 +2,10 @@
 // Use of this source code is governed by an Apache 2.0 license
 // that can be found in the LICENSE file.
 
-#include <librealsense2/rs.h>
-#include <librealsense2/h/rs_internal.h>
-#include <librealsense2/h/rs_pipeline.h>
-#include <librealsense2/hpp/rs_types.hpp>
+#include <librealsense2-framos/rs.h>
+#include <librealsense2-framos/h/rs_internal.h>
+#include <librealsense2-framos/h/rs_pipeline.h>
+#include <librealsense2-framos/hpp/rs_types.hpp>
 #include <nan.h>
 
 #include <iostream>

@@ -2,9 +2,9 @@
 // Copyright(c) 2017 Intel Corporation. All Rights Reserved.
 
 /* Include the librealsense C header files */
-#include <librealsense2/rs.h>
-#include <librealsense2/h/rs_pipeline.h>
-#include <librealsense2/h/rs_frame.h>
+#include <librealsense2-framos/rs.h>
+#include <librealsense2-framos/h/rs_pipeline.h>
+#include <librealsense2-framos/h/rs_frame.h>
 
 #include <stdlib.h>
 #include <stdint.h>

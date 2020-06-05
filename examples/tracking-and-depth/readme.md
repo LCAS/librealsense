@@ -38,7 +38,7 @@ This example is based on the [pointcloud example](../pointcloud/). Please also r
 
 Similar to the [first tutorial](../capture/) we include the Cross-Platform API:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 Next, we prepared a [very short helper library](../example.hpp) encapsulating basic OpenGL rendering and window management:

@@ -1,7 +1,7 @@
 #ifdef RS2_USE_CUDA
 
 #include "cuda-align.cuh"
-#include "../../../include/librealsense2/rsutil.h"
+#include "../../../include/librealsense2-framos/rsutil.h"
 #include "../../cuda/rscuda_utils.cuh"
 
 // CUDA headers

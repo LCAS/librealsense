@@ -12,7 +12,7 @@ Assuming camera is connected you should see `"The camera is facing an object X m
 First, we include the Intel® RealSense™ Cross-Platform API.  
 All but advanced functionality is provided through a single header:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 Next, we create and start RealSense pipeline. Pipeline is the primary high level primitive controlling camera enumeration and streaming. 

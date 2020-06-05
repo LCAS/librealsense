@@ -1,7 +1,7 @@
 #include "Rs2Driver.h"
 #include "Rs2Commands.h"
 #include "XnDepthShiftTables.h"
-#include <librealsense2/rsutil.h>
+#include <librealsense2-framos/rsutil.h>
 
 namespace oni { namespace driver {
 

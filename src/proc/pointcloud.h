@@ -2,7 +2,7 @@
 // Copyright(c) 2017 Intel Corporation. All Rights Reserved.
 
 #pragma once
-#include "../include/librealsense2/hpp/rs_frame.hpp"
+#include "../include/librealsense2-framos/hpp/rs_frame.hpp"
 #include "synthetic-stream.h"
 
 namespace librealsense

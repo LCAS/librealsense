@@ -22,7 +22,7 @@
 #include <string>
 
 // Intel Realsense Headers
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 
 // PCL Headers
 #include <pcl/io/pcd_io.h>

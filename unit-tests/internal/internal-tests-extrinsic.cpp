@@ -7,8 +7,8 @@
 #include <chrono>
 #include <ctime>
 #include <algorithm>
-#include <librealsense2/rs.hpp>
-#include <librealsense2/hpp/rs_sensor.hpp>
+#include <librealsense2-framos/rs.hpp>
+#include <librealsense2-framos/hpp/rs_sensor.hpp>
 #include "../../common/tiny-profiler.h"
 #include "./../src/environment.h"
 

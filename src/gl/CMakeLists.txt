@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 2.8.9)
 
-project(realsense2-gl)
+project(realsense2-framos-gl)
 
 set(REALSENSE_GL_CPP
     synthetic-stream-gl.h
@@ -14,8 +14,8 @@ set(REALSENSE_GL_CPP
     pointcloud-gl.cpp
     rs-gl.cpp
     realsense-gl.def
-    ../../include/librealsense2-gl/rs_processing_gl.h
-    ../../include/librealsense2-gl/rs_processing_gl.hpp
+    ../../include/librealsense2-framos-gl/rs_processing_gl.h
+    ../../include/librealsense2-framos-gl/rs_processing_gl.hpp
     ../../third-party/glad/glad.c
     ../../common/opengl3.cpp
     ../../common/opengl3.h
@@ -43,8 +43,8 @@ source_group("3rd Party" FILES
     ../../third-party/glad/glad.c)
 
 source_group("API" FILES
-    ../../include/librealsense2-gl/rs_processing_gl.h
-    ../../include/librealsense2-gl/rs_processing_gl.hpp
+    ../../include/librealsense2-framos-gl/rs_processing_gl.h
+    ../../include/librealsense2-framos-gl/rs_processing_gl.hpp
     realsense-gl.def)
 
 add_library(${LRS_GL_TARGET} ${REALSENSE_GL_CPP})
@@ -67,16 +67,16 @@ target_include_directories(${PROJECT_NAME}
 
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER Library)
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${REALSENSE_VERSION_STRING} SOVERSION "${REALSENSE_VERSION_MAJOR}.${REALSENSE_VERSION_MINOR}")
-write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/realsense2-glConfigVersion.cmake"
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/realsense2-framos-glConfigVersion.cmake"
     VERSION ${REALSENSE_VERSION_STRING} COMPATIBILITY AnyNewerVersion)
 
-configure_package_config_file(../../CMake/realsense2-glConfig.cmake.in realsense2-glConfig.cmake
+configure_package_config_file(../../CMake/realsense2-framos-glConfig.cmake.in realsense2-framos-glConfig.cmake
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/bin
     PATH_VARS CMAKE_INSTALL_INCLUDEDIR
 )
 
-configure_file(../../config/librealsense-gl.pc.in ../../config/realsense2-gl.pc @ONLY)
+configure_file(../../config/librealsense-gl.pc.in ../../config/realsense2-framos-gl.pc @ONLY)
 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE ${DEPENDENCIES}
@@ -86,29 +86,29 @@ target_link_libraries(${PROJECT_NAME}
 #https://gitlab.kitware.com/cmake/cmake/merge_requests/2152
 # Hence these targets will be invoked from the project and not the root directory
 install(TARGETS ${LRS_GL_TARGET}
-    EXPORT realsense2-glTargets
+    EXPORT realsense2-framos-glTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2"
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2-framos"
 )
 
-install(EXPORT realsense2-glTargets
-    FILE realsense2-glTargets.cmake
+install(EXPORT realsense2-framos-glTargets
+    FILE realsense2-framos-glTargets.cmake
     NAMESPACE ${LRS_GL_TARGET}::
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES "${CMAKE_BINARY_DIR}/src/gl/realsense2-glConfig.cmake"
+install(FILES "${CMAKE_BINARY_DIR}/src/gl/realsense2-framos-glConfig.cmake"
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES "${CMAKE_BINARY_DIR}/src/gl/realsense2-glConfigVersion.cmake"
+install(FILES "${CMAKE_BINARY_DIR}/src/gl/realsense2-framos-glConfigVersion.cmake"
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
 # Set library pkgconfig file for facilitating 3rd party integration
-install(FILES "${CMAKE_BINARY_DIR}/config/realsense2-gl.pc"
+install(FILES "${CMAKE_BINARY_DIR}/config/realsense2-framos-gl.pc"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
 )
 

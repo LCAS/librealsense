@@ -4,9 +4,9 @@
 
 #include "sse-align.h"
 #include <tmmintrin.h> // For SSE3 intrinsic used in unpack_yuy2_sse
-#include "../include/librealsense2/hpp/rs_sensor.hpp"
-#include "../include/librealsense2/hpp/rs_processing.hpp"
-#include "../include/librealsense2/rsutil.h"
+#include "../include/librealsense2-framos/hpp/rs_sensor.hpp"
+#include "../include/librealsense2-framos/hpp/rs_processing.hpp"
+#include "../include/librealsense2-framos/rsutil.h"
 
 #include "core/video.h"
 #include "proc/synthetic-stream.h"

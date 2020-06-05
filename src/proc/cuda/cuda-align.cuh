@@ -1,7 +1,7 @@
 #pragma once
 #ifdef RS2_USE_CUDA
 
-#include "../../../include/librealsense2/rs.h"
+#include "../../../include/librealsense2-framos/rs.h"
 #include <memory>
 #include <stdint.h>
 

@@ -2,7 +2,7 @@
 Copyright(c) 2017 Intel Corporation. All Rights Reserved. */
 
 #include "python.hpp"
-#include "../include/librealsense2/rs.hpp"
+#include "../include/librealsense2-framos/rs.hpp"
 
 PYBIND11_MODULE(NAME, m) {
     m.doc() = R"pbdoc(

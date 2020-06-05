@@ -1,4 +1,4 @@
-file(READ "config/99-realsense-libusb.rules" contents HEX)
+file(READ "config/99-realsense-framos-libusb.rules" contents HEX)
 
 set(UDEV_HEADER "${CMAKE_CURRENT_BINARY_DIR}/udev-rules.h")
 

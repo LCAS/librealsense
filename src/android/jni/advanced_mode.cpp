@@ -3,8 +3,8 @@
 
 #include <jni.h>
 #include "error.h"
-#include "../../../include/librealsense2/rs.h"
-#include "../../../include/librealsense2/rs_advanced_mode.h"
+#include "../../../include/librealsense2-framos/rs.h"
+#include "../../../include/librealsense2-framos/rs_advanced_mode.h"
 #include "../../api.h"
 
 extern "C" JNIEXPORT void JNICALL

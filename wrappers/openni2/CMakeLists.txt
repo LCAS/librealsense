@@ -3,7 +3,7 @@ project (rs2driver)
 
 # DEPS
 set(OPENNI2_DIR "c:/Program Files/OpenNI2" CACHE FILEPATH "OpenNI2 SDK directory")
-set(REALSENSE2_DIR "c:/Program Files (x86)/Intel RealSense SDK 2.0" CACHE FILEPATH "RealSense2 SDK directory")
+set(REALSENSE2_DIR "c:/Program Files (x86)/Intel RealSense SDK 2.0" CACHE FILEPATH "realsense2-framos SDK directory")
 
 # INCLUDE DIR
 if (UNIX)
@@ -54,4 +54,4 @@ endif()
 
 # LINK
 add_library (rs2driver SHARED ${INCLUDE_FILES} ${SRC_FILES})
-target_link_libraries (rs2driver realsense2)
+target_link_libraries (rs2driver realsense2-framos)

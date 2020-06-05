@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include "types.h"
-#include <librealsense2/rs_advanced_mode.h>
+#include <librealsense2-framos/rs_advanced_mode.h>
 #include "core/advanced_mode.h"
 #include "api.h"
 

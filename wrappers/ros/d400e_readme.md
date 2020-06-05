@@ -75,7 +75,7 @@ source ~/.bashrc
 ```
 mkdir -p ~/catkin_ws/src/realsense-ros
 cd ~/catkin_ws/src/realsense-ros
-cp -r /usr/src/librealsense2/wrappers/ros/. .
+cp -r /usr/src/librealsense2-framos/wrappers/ros/. .
 cd ..
 catkin_init_workspace
 ```

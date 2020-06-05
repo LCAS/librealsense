@@ -6,7 +6,7 @@ project(RealsenseUnitTests)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-set(DEPENDENCIES realsense2)
+set(DEPENDENCIES realsense2-framos)
 
 set (unit_tests_sources
     unit-tests-live.cpp

@@ -6,8 +6,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #include "unit-tests-common.h"
 #include "unit-tests-post-processing.h"
-#include "../include/librealsense2/rs_advanced_mode.hpp"
-#include <librealsense2/hpp/rs_frame.hpp>
+#include "../include/librealsense2-framos/rs_advanced_mode.hpp"
+#include <librealsense2-framos/hpp/rs_frame.hpp>
 #include <cmath>
 #include <iostream>
 #include <chrono>

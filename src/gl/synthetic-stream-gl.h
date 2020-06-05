@@ -6,9 +6,9 @@
 #include "core/processing.h"
 #include "image.h"
 #include "source.h"
-#include "../include/librealsense2/hpp/rs_frame.hpp"
-#include "../include/librealsense2/hpp/rs_processing.hpp"
-#include "../include/librealsense2-gl/rs_processing_gl.hpp"
+#include "../include/librealsense2-framos/hpp/rs_frame.hpp"
+#include "../include/librealsense2-framos/hpp/rs_processing.hpp"
+#include "../include/librealsense2-framos-gl/rs_processing_gl.hpp"
 #include "opengl3.h"
 #include "tiny-profiler.h"
 

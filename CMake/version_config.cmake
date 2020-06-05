@@ -6,7 +6,7 @@
 # for failures should these constants be modified in future      #
 ##################################################################
 function(assign_version_property VER_COMPONENT)
-    file(STRINGS "./include/librealsense2/rs.h" REALSENSE_VERSION_${VER_COMPONENT} REGEX "#define RS2_API_${VER_COMPONENT}_VERSION")
+    file(STRINGS "./include/librealsense2-framos/rs.h" REALSENSE_VERSION_${VER_COMPONENT} REGEX "#define RS2_API_${VER_COMPONENT}_VERSION")
     separate_arguments(REALSENSE_VERSION_${VER_COMPONENT})
     list(GET REALSENSE_VERSION_${VER_COMPONENT} -1 tmp)
     if (tmp LESS 0)
