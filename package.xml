@@ -36,6 +36,7 @@
   <depend>udev</depend>
   <depend>framoscamerasuite</depend>
   <depend>libglfw3-dev</depend>
+  <depend>opengl</depend>
 
   <export>
     <build_type>cmake</build_type>
