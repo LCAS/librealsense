@@ -70,7 +70,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${REALSENSE_VERSION_STR
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/realsense2-framos-glConfigVersion.cmake"
     VERSION ${REALSENSE_VERSION_STRING} COMPATIBILITY AnyNewerVersion)
 
-configure_package_config_file(../../CMake/realsense2-glConfig.cmake.in realsense2-framos-glConfig.cmake
+configure_package_config_file(../../CMake/realsense2-framos-glConfig.cmake.in realsense2-framos-glConfig.cmake
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/bin
     PATH_VARS CMAKE_INSTALL_INCLUDEDIR
