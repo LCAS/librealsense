@@ -66,6 +66,7 @@ if (UNIX)
     install(FILES
         ${PROJECT_SOURCE_DIR}/config/99-realsense-libusb.rules 
         DESTINATION /etc/udev/rules.d/
+        CONFIGURATIONS RELEASE
     )
 endif()
 
