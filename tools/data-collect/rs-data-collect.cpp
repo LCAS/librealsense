@@ -6,7 +6,7 @@
 // The utility is configured with command-line keys and requires user-provided config file to run
 // See rs-data-collect.h for config examples
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "rs-data-collect.h"
 #include "tclap/CmdLine.h"
 #include <thread>

@@ -377,7 +377,7 @@ The stream type is expressed in the topic name
 
 ###### Supported Encoding
 
-For video streams, the supported encoding types can be found at <a href="http://docs.ros.org/jade/api/sensor_msgs/html/namespacesensor__msgs_1_1image__encodings.html">ros documentation</a>. Additional supported encodings are listed under [rs_sensor.h](../../../include/librealsense2/h/rs_sensor.h) as the `rs2_format` enumeration. Note that some of the encodings appear in both locations.
+For video streams, the supported encoding types can be found at <a href="http://docs.ros.org/jade/api/sensor_msgs/html/namespacesensor__msgs_1_1image__encodings.html">ros documentation</a>. Additional supported encodings are listed under [rs_sensor.h](../../../include/librealsense2-framos/h/rs_sensor.h) as the `rs2_format` enumeration. Note that some of the encodings appear in both locations.
 
 --------------
 

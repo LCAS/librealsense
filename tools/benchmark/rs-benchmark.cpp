@@ -1,10 +1,10 @@
 // License: Apache 2.0. See LICENSE file in root directory.
 // Copyright(c) 2015 Intel Corporation. All Rights Reserved.
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <librealsense2-gl/rs_processing_gl.hpp>
+#include <librealsense2-framos-gl/rs_processing_gl.hpp>
 
 #include <iostream>
 #include <iomanip>

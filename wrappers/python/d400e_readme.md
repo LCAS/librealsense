@@ -72,8 +72,8 @@ make -j$(nproc)
 
 Copy the pyrealsense library next to the example and run it:
 ```
-cd ~/librealsense2/wrappers/python/examples
-cp ~/librealsense2/build/wrappers/python/pyrealsense2* .
+cd ~/librealsense2-framos/wrappers/python/examples
+cp ~/librealsense2-framos/build/wrappers/python/pyrealsense2* .
 python3 align-depth2color.py
 ```
 

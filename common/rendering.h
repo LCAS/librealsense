@@ -8,8 +8,8 @@
 #endif
 #include <glad/glad.h>
 
-#include <librealsense2/rs.hpp>
-#include <librealsense2-gl/rs_processing_gl.hpp>
+#include <librealsense2-framos/rs.hpp>
+#include <librealsense2-framos-gl/rs_processing_gl.hpp>
 
 #include <vector>
 #include <algorithm>

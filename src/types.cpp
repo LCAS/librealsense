@@ -9,7 +9,7 @@
 #include <numeric>
 #include <fstream>
 #include <cmath>
-#include "../include/librealsense2/hpp/rs_processing.hpp"
+#include "../include/librealsense2-framos/hpp/rs_processing.hpp"
 
 #define STRCASE(T, X) case RS2_##T##_##X: {\
         static const std::string s##T##_##X##_str = make_less_screamy(#X);\

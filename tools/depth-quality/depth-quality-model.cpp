@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <regex>
 #include "depth-quality-model.h"
-#include <librealsense2/rs_advanced_mode.hpp>
+#include <librealsense2-framos/rs_advanced_mode.hpp>
 #include "model-views.h"
 #include "viewer.h"
 #include "os.h"

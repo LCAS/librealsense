@@ -21,8 +21,8 @@ This will provide fast, reliable way to optimize the device for a specific use c
  The following code sample checking if the connected device is in advanced-mode and moving it to advance-mode if it's not.
 ```c
 /* Include the librealsense C header files */
-#include <librealsense2/rs.h>
-#include <librealsense2/rs_advanced_mode.h>
+#include <librealsense2-framos/rs.h>
+#include <librealsense2-framos/rs_advanced_mode.h>
 
 #include <stdio.h> // printf
 #include <stdlib.h> // exit
@@ -85,8 +85,8 @@ The following code sample showing how to serialize the current values of advance
 and also how to load and apply it to the device.
 ```c
 /* Include the librealsense C header files */
-#include <librealsense2/rs.h>
-#include <librealsense2/rs_advanced_mode.h>
+#include <librealsense2-framos/rs.h>
+#include <librealsense2-framos/rs_advanced_mode.h>
 
 #include <stdio.h> // printf
 #include <stdlib.h> // exit
@@ -166,8 +166,8 @@ int main()
 The following code sample showing how to retrieve the advanced-mode control values. 
 ```c
 /* Include the librealsense C header files */
-#include <librealsense2/rs.h>
-#include <librealsense2/rs_advanced_mode.h>
+#include <librealsense2-framos/rs.h>
+#include <librealsense2-framos/rs_advanced_mode.h>
 
 #include <stdio.h> // printf
 #include <stdlib.h> // exit
@@ -244,8 +244,8 @@ int main()
 The following sample code showing how to enable advanced-mode in a connected D400 device.
 ```cpp
 /* Include the librealsense CPP header files */
-#include <librealsense2/rs.hpp>
-#include <librealsense2/rs_advanced_mode.hpp>
+#include <librealsense2-framos/rs.hpp>
+#include <librealsense2-framos/rs_advanced_mode.hpp>
 
 #include <iostream>
 
@@ -300,8 +300,8 @@ catch (const exception & e)
 The following code sample showing how to retrieve the advanced-mode control values. 
 ```cpp
 /* Include the librealsense CPP header files */
-#include <librealsense2/rs.hpp>
-#include <librealsense2/rs_advanced_mode.hpp>
+#include <librealsense2-framos/rs.hpp>
+#include <librealsense2-framos/rs_advanced_mode.hpp>
 
 #include <iostream>
 

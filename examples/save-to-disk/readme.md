@@ -12,7 +12,7 @@ The application should run for about a second and exit after saving PNG and CSV 
 
 Similar to the [first tutorial](../capture/) we include the Cross-Platform API:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 We are using [nothings/stb](https://github.com/nothings/stb) to quickly save data to disk in PNG format: 

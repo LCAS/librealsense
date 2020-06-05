@@ -2,14 +2,14 @@
 // Copyright(c) 2015-2017 Intel Corporation. All Rights Reserved.
 // Partly modified by Framos GmbH.
 
-#include <librealsense2/rs.hpp>     // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp>     // Include RealSense Cross Platform API
 #include "example.hpp"              // Include short list of convenience functions for rendering
 
 #include <map>
 #include <vector>
 #include <regex>
-#include <librealsense2/hpp/rs_frame.hpp>
-#include <librealsense2/hpp/rs_d400e.hpp>
+#include <librealsense2-framos/hpp/rs_frame.hpp>
+#include <librealsense2-framos/hpp/rs_d400e.hpp>
 
 
 

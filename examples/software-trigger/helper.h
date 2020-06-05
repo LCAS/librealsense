@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "../example.hpp"
 
 namespace helper

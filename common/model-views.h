@@ -2,7 +2,7 @@
 // Copyright(c) 2017 Intel Corporation. All Rights Reserved.
 
 #pragma once
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 
 #include "rendering.h"
 #include "ux-window.h"

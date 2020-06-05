@@ -9,7 +9,7 @@
 #include "proc/synthetic-stream.h"
 #include "synthetic-stream-gl.h"
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "opengl3.h"
 
 #include <memory>

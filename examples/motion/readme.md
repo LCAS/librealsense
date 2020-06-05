@@ -19,7 +19,7 @@ The application should open a window with a 3D model of the camera, approximatin
 First, we include the Intel® RealSense™ Cross-Platform API.  
 All but advanced functionality is provided through a single header:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 In this example we will also use the auxiliary library of `example.hpp`:

@@ -16,7 +16,7 @@ Throughout the example, frames from the active device (default, recorder or play
 As with any SDK application we include the Intel RealSense Cross Platform API:
 
 ```cpp
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 ```
 
 In this example we will also use the auxiliary library of `example.hpp`:

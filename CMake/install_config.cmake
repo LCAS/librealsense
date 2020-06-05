@@ -5,24 +5,24 @@ add_custom_target(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/c
 
 include(CMakePackageConfigHelpers)
 
-write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/realsense2ConfigVersion.cmake"
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/realsense2-framosConfigVersion.cmake"
     VERSION ${REALSENSE_VERSION_STRING} COMPATIBILITY AnyNewerVersion)
 
-configure_package_config_file(CMake/realsense2Config.cmake.in realsense2Config.cmake
+configure_package_config_file(CMake/realsense2-framosConfig.cmake.in realsense2-framosConfig.cmake
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/bin
     PATH_VARS CMAKE_INSTALL_INCLUDEDIR
 )
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
-configure_file(config/librealsense.pc.in config/realsense2.pc @ONLY)
+configure_file(config/librealsense.pc.in config/realsense2-framos.pc @ONLY)
 
 install(TARGETS ${LRS_TARGET}
-    EXPORT realsense2Targets
+    EXPORT realsense2-framosTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2"
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_PREFIX}/include/librealsense2-framos"
 )
 
 #if (UNIX)
@@ -64,34 +64,34 @@ install(TARGETS ${LRS_TARGET}
 
 if (UNIX)
     install(FILES
-        ${PROJECT_SOURCE_DIR}/config/99-realsense-libusb.rules 
+        ${PROJECT_SOURCE_DIR}/config/99-realsense-framos-libusb.rules 
         DESTINATION /etc/udev/rules.d/
         CONFIGURATIONS RELEASE
     )
 endif()
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/librealsense2
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/librealsense2-framos
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-install(EXPORT realsense2Targets
-        FILE realsense2Targets.cmake
+install(EXPORT realsense2-framosTargets
+        FILE realsense2-framosTargets.cmake
         NAMESPACE ${LRS_TARGET}::
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/realsense2Config.cmake"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/realsense2-framosConfig.cmake"
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/realsense2ConfigVersion.cmake"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/realsense2-framosConfigVersion.cmake"
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(CODE "execute_process(COMMAND ldconfig)")
 
 # Set library pkgconfig file for facilitating 3rd party integration
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/config/realsense2.pc"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/config/realsense2-framos.pc"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
 )
 

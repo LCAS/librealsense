@@ -1,6 +1,6 @@
 #  minimum required cmake version: 3.1.0
 cmake_minimum_required(VERSION 3.1.0)
-project(librealsense2 LANGUAGES CXX C)
+project(librealsense2-framos LANGUAGES CXX C)
 
 include(CMake/lrs_options.cmake)
 include(CMake/connectivity_check.cmake)

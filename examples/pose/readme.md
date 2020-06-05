@@ -13,7 +13,7 @@ The application should open a window in which it prints the current x, y, z valu
 First, we include the Intel® RealSense™ Cross-Platform API.  
 All but advanced functionality is provided through a single header:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 We declare the pipeline and configure it with `RS2_STREAM_POSE` and `RS2_FORMAT_6DOF`. Then, we start the pipeline.

@@ -5,7 +5,7 @@
 #include <cmath>
 #include "image-avx.h"
 
-//#include "../include/librealsense2/rsutil.h" // For projection/deprojection logic
+//#include "../include/librealsense2-framos/rsutil.h" // For projection/deprojection logic
 
 #ifndef ANDROID
     #if defined(__SSSE3__) && defined(__AVX2__)

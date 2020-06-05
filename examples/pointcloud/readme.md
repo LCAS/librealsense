@@ -13,7 +13,7 @@ The application should open a window with a pointcloud. Using your mouse, you sh
 
 Similar to the [first tutorial](../capture/) we include the Cross-Platform API:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 Next, we prepared a [very short helper library](../example.hpp) encapsulating basic OpenGL rendering and window management:

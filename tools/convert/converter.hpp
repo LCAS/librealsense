@@ -10,7 +10,7 @@
 #include <string>
 #include <sstream>
 
-#include "librealsense2/rs.hpp"
+#include "librealsense2-framos/rs.hpp"
 
 
 namespace rs2 {
