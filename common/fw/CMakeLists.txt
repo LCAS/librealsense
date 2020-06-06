@@ -27,18 +27,18 @@ message(STATUS "SR3XX_FW_VERSION: ${SR3XX_FW_VERSION}")
 set(SR3XX_FW_SHA1 55237dba5d7db20e7c218975375d05b4210e9460)
 set(SR3XX_FW_URL "http://realsense-hw-public.s3-eu-west-1.amazonaws.com/Releases/SR300/FW")
 
-add_library(${PROJECT_NAME} STATIC empty.c)
+add_library(${PROJECT_NAME}-framos STATIC empty.c)
 
 if (MSVC)
   # lib.exe can't handle multiple .res files, so include them in one.
   # even then, the linker won't grab a .res out of a .lib object, so it needs to be explicitly listed
   # and to find the name of the .res file (across cmake generators) we need to create our own rule. :(
   add_custom_command(TARGET ${PROJECT_NAME} BYPRODUCTS ${PROJECT_NAME}.res COMMAND ${CMAKE_RC_COMPILER} ${CMAKE_RC_FLAGS} /I . /fo "${PROJECT_NAME}.res" "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.rc")
-  target_link_libraries(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.res")
+  target_link_libraries(${PROJECT_NAME}-framos PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.res")
 endif()
 
-target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
-set_target_properties (${PROJECT_NAME} PROPERTIES FOLDER Resources)
+target_include_directories(${PROJECT_NAME}-framos PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
+set_target_properties (${PROJECT_NAME}-framos PROPERTIES FOLDER Resources)
 
 function(target_binary url version sha1 symbol ext)
   set(binary "${CMAKE_CURRENT_BINARY_DIR}/${symbol}-${version}${ext}")
@@ -64,14 +64,14 @@ function(target_binary url version sha1 symbol ext)
   else()
     set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/${symbol}.c" OBJECT_DEPENDS "${binary}")
   endif()
-  target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/${symbol}.c")
+  target_sources(${PROJECT_NAME}-framos PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/${symbol}.c")
 endfunction()
 
 target_binary( "${D4XX_FW_URL}"  "${D4XX_FW_VERSION}"  "${D4XX_FW_SHA1}" D4XX_FW_Image .bin)
 target_binary( "${D4XX_RC_URL}"  "${D4XX_RC_VERSION}"  "${D4XX_RC_SHA1}" D4XX_RC_Image .bin)
 target_binary( "${SR3XX_FW_URL}"  "${SR3XX_FW_VERSION}"  "${SR3XX_FW_SHA1}" SR3XX_FW_Image .bin)
 
-install(TARGETS ${PROJECT_NAME} EXPORT realsense2Targets
+install(TARGETS ${PROJECT_NAME}-framos EXPORT realsense2Targets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
