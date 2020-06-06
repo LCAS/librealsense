@@ -54,26 +54,26 @@ ENDIF(WIN32)
 set(SDK_LIB_TYPE "STATIC")
 add_definitions(-DBUILD_STATIC)
 
-add_library(${PROJECT_NAME} ${SDK_LIB_TYPE} ${SOURCE_FILES})
-target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/../include> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include> PRIVATE infra)
-target_link_libraries(${PROJECT_NAME}
+add_library(${PROJECT_NAME}-framos ${SDK_LIB_TYPE} ${SOURCE_FILES})
+target_include_directories(${PROJECT_NAME}-framos PUBLIC $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/../include> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include> PRIVATE infra)
+target_link_libraries(${PROJECT_NAME}-framos
     PRIVATE
     ${OS_SPECIFIC_LIBS}
     usb
-    fw
+    fw-framos
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${LIBVERSION}" SOVERSION "${LIBTM_VERSION_MAJOR}")
-set_target_properties (${PROJECT_NAME} PROPERTIES FOLDER Library)
+set_target_properties(${PROJECT_NAME}-framos PROPERTIES VERSION "${LIBVERSION}" SOVERSION "${LIBTM_VERSION_MAJOR}")
+set_target_properties (${PROJECT_NAME}-framos PROPERTIES FOLDER Library)
 
 set(CMAKECONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/../cmake/realsense2")
 
 configure_file("${PROJECT_SOURCE_DIR}/Version.h.in"  "${CMAKE_CURRENT_BINARY_DIR}/Version.h")
 configure_file("${PROJECT_SOURCE_DIR}/version.rc.in" "${CMAKE_CURRENT_BINARY_DIR}/version.rc")
 
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
+target_include_directories(${PROJECT_NAME}-framos PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
 
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME}-framos
     EXPORT realsense2Targets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

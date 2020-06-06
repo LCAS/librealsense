@@ -13,9 +13,9 @@ set( FW_URL "http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/target"
 set(APP_URL "http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/app")
 set( BL_URL "http://realsense-hw-public.s3.amazonaws.com/Releases/TM2/FW/bl")
 
-add_library(fw STATIC empty.c)
+add_library(fw-framos STATIC empty.c)
 
-target_include_directories(fw PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
+target_include_directories(fw-framos PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
 function(target_binary url version sha1 symbol ext)
   set(binary "${CMAKE_CURRENT_BINARY_DIR}/${symbol}-${version}${ext}")
@@ -41,7 +41,7 @@ function(target_binary url version sha1 symbol ext)
   else()
     set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/fw_${symbol}.c" OBJECT_DEPENDS "${binary}")
   endif()
-  target_sources(fw PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/fw_${symbol}.c")
+  target_sources(fw-framos PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/fw_${symbol}.c")
 endfunction()
 
 target_binary( "${FW_URL}"  "${FW_VERSION}"  "${FW_SHA1}" target .mvcmd)
@@ -51,14 +51,14 @@ target_binary( "${BL_URL}"  "${BL_VERSION}"  "${BL_SHA1}" central_bl .bin)
 if (MSVC)
   # lib.exe can't handle multiple .res files, so include them in one.
   configure_file("fw.rc.in" "${CMAKE_CURRENT_BINARY_DIR}/fw.rc")
-  target_sources(fw PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/fw.rc")
+  target_sources(fw-framos PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/fw.rc")
   # even then, the linker won't grab a .res out of a .lib object, so it needs to be explicitly listed
-  target_link_libraries(fw PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/fw.res")
+  target_link_libraries(fw-framos PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/fw.res")
   # and to find the name of the .res file (across cmake generators) we need to create our own rule. :(
-  add_custom_command(TARGET fw BYPRODUCTS fw.res COMMAND ${CMAKE_RC_COMPILER} ${CMAKE_RC_FLAGS} /I . /fo fw.res fw.rc)
+  add_custom_command(TARGET fw-framos BYPRODUCTS fw.res COMMAND ${CMAKE_RC_COMPILER} ${CMAKE_RC_FLAGS} /I . /fo fw.res fw.rc)
 endif()
 
-install(TARGETS fw EXPORT realsense2Targets
+install(TARGETS fw-framos EXPORT realsense2Targets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
