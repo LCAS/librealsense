@@ -41,6 +41,9 @@
 #include <fts.h>
 #include <regex>
 #include <list>
+#ifndef SKIP_CS_SUPPORT
+#include "cs/cs-factory.h"
+#endif
 
 #include <sys/signalfd.h>
 #include <signal.h>
@@ -1718,6 +1721,23 @@ namespace librealsense
 
             return results;
         }
+
+#ifndef SKIP_CS_SUPPORT
+        std::shared_ptr<cs_device> v4l_backend::create_cs_device(cs_device_info info) const
+        {
+            return std::make_shared<platform::cs_device>(info);
+        }
+#endif
+
+        std::vector<cs_device_info> v4l_backend::query_cs_devices() const
+        {
+#ifndef SKIP_CS_SUPPORT
+            return cs_info::query_cs_devices();
+#else
+            return std::vector<cs_device_info>();
+#endif
+        }
+
         std::shared_ptr<time_service> v4l_backend::create_time_service() const
         {
             return std::make_shared<os_time_service>();

@@ -27,6 +27,16 @@ namespace librealsense
                     break;
                 }
             }
+
+            for (const auto& uvc : data.cs_devices)
+            {
+                if (uvc.vid == vid || vid == 0)
+                {
+                    result.push_back(dev);
+                    filtered = true;
+                    break;
+                }
+            }
         }
         return result;
     }

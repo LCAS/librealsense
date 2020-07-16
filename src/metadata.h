@@ -643,6 +643,24 @@ namespace librealsense
 
     constexpr uint8_t metadata_raw_size = sizeof(metadata_raw);
 
+    struct metadata_framos_raw
+    {
+        platform::cs_header     header;
+    };
+
+    constexpr uint8_t metadata_framos_raw_size = sizeof(metadata_framos_raw);
+
+    struct metadata_framos_basic
+    {
+        platform::cs_header     header;
+        md_capture_timing       payload;
+
+        inline bool capture_valid() const
+        {
+            return true;
+        }
+    };
+
     /**\brief metadata_intel_basic - a subset of the full metadata required to provide
      *    the essential sensor attributes only */
     struct metadata_intel_basic

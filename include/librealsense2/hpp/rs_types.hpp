@@ -6,6 +6,7 @@
 
 #include "../rs.h"
 #include "../h/rs_context.h"
+#include "../h/rs_d400e.h"
 #include "../h/rs_device.h"
 #include "../h/rs_frame.h"
 #include "../h/rs_processing.h"

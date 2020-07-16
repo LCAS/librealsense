@@ -4,4 +4,5 @@ target_sources(${LRS_DOTNET_TARGET}
         "${CMAKE_CURRENT_LIST_DIR}/ObjectPool.cs"
         "${CMAKE_CURRENT_LIST_DIR}/Log.cs"
         "${CMAKE_CURRENT_LIST_DIR}/ICompositeDisposable.cs"
+        "${CMAKE_CURRENT_LIST_DIR}/D400e.cs"
 )

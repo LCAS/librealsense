@@ -84,6 +84,19 @@ Note that frames can arrive asynchronously. You can query their time stamp or co
 Finally, it is VERY important that you use the Release Frame VI to release each frame when it is no longer needed, or you will very quickly stop streaming. Also, be sure to CLOSE everything properly, or you will have problems streaming the next time, and LabVIEW may crash. 
 
 
+
+
+# FRAMOS RealSense
+FRAMOS-librealsense2 extends the standard librealsense2 API with features applicable to the D400e cameras. Source files are located in FRAMOS-librealsense2 install folder, inside of *wrappers/labview* subfolder. It is necessary to copy realsense2.dll from *bin* to folder with LabVIEW source files.
+
+For D400 and D400e devices, FRAMOS-librealsense2 library currently supports following demos:
+* Monochrome + Depth: D4xx, D4xxe
+* Left-Rigth:   D4xx, D4xxe
+* PointCloud:   D4xxe
+* Third Color Camera:   D4xx, D4xxe
+
+
+
 -------------------
 
 

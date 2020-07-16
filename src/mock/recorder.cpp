@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "types.h"
 #include <iostream>
+#include "cs/cs-factory.h"
 
 using namespace std;
 using namespace sql;
@@ -1088,6 +1089,16 @@ namespace librealsense
             }, 0, call_type::query_usb_devices);
         }
 
+        std::shared_ptr<cs_device> record_backend::create_cs_device(cs_device_info info) const
+        {
+            return std::make_shared<platform::cs_device>(info);
+        }
+
+        std::vector<cs_device_info> record_backend::query_cs_devices() const
+        {
+            return cs_info::query_cs_devices();
+        }
+
         std::shared_ptr<time_service> record_backend::create_time_service() const
         {
             return _source->create_time_service();
@@ -1156,6 +1167,16 @@ namespace librealsense
         vector<usb_device_info> playback_backend::query_usb_devices() const
         {
             return _rec->load_usb_device_info_list();
+        }
+
+        std::shared_ptr<cs_device> playback_backend::create_cs_device(cs_device_info info) const
+        {
+            return std::make_shared<platform::cs_device>(info);
+        }
+
+        std::vector<cs_device_info> playback_backend::query_cs_devices() const
+        {
+            return cs_info::query_cs_devices();
         }
 
         std::shared_ptr<time_service> playback_backend::create_time_service() const

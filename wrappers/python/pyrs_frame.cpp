@@ -57,6 +57,7 @@ void init_frame(py::module &m) {
         .def("is_default", &rs2::stream_profile::is_default, "Checks if the stream profile is marked/assigned as default, "
              "meaning that the profile will be selected when the user requests stream configuration using wildcards.")
         .def("__nonzero__", &rs2::stream_profile::operator bool, "Checks if the profile is valid")
+        .def("__bool__", &rs2::stream_profile::operator bool, "Checks if the profile is valid")
         .def("get_extrinsics_to", &rs2::stream_profile::get_extrinsics_to, "Get the extrinsic transformation between two profiles (representing physical sensors)", "to"_a)
         .def("register_extrinsics_to", &rs2::stream_profile::register_extrinsics_to, "Assign extrinsic transformation parameters "
              "to a specific profile (sensor). The extrinsic information is generally available as part of the camera calibration, "
@@ -110,6 +111,7 @@ void init_frame(py::module &m) {
         .def(py::init<rs2::frame>())
         .def("swap", &rs2::frame::swap, "Swap the internal frame handle with the one in parameter", "other"_a)
         .def("__nonzero__", &rs2::frame::operator bool, "check if internal frame handle is valid")
+        .def("__bool__", &rs2::frame::operator bool, "check if internal frame handle is valid")
         .def("get_timestamp", &rs2::frame::get_timestamp, "Retrieve the time at which the frame was captured")
         .def_property_readonly("timestamp", &rs2::frame::get_timestamp, "Time at which the frame was captured. Identical to calling get_timestamp.")
         .def("get_frame_timestamp_domain", &rs2::frame::get_frame_timestamp_domain, "Retrieve the timestamp domain.")

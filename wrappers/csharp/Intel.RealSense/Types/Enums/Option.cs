@@ -139,7 +139,7 @@ namespace Intel.RealSense
 
         /// <summary>Impose Inter-camera HW synchronization mode. Applicable for D400/Rolling Shutter SKUs</summary>
         InterCamSyncMode = 42,
-
+        
         /// <summary>Select a stream to process</summary>
         StreamFilter = 43,
 
@@ -167,37 +167,23 @@ namespace Intel.RealSense
         /// <summary>MA temperature</summary>
         MATemperature = 51,
 
-        /// <summary>Hardware stream configuration</summary>
-        HardwarePreset = 52,
-
-        /// <summary>Disable global time</summary>
-        GlobalTimeEnabled = 53,
-
         /// <summary>APD temperature</summary>
         APDTemperature = 54,
 
-        /// <summary>Enable an internal map</summary>
-        EnableMapping = 55,
+        /// <summary>Inter-packet delay for eth cameras</summary>
+        InterPacketDelay = 71,
 
-        /// <summary>Enable appearance based relocalization</summary>
-        EnableRelocalization = 56,
+        /// <summary>Packet size for eth cameras</summary>
+        PacketSize = 72,
+        
+        /// <summary>Select external trigger type for eth cameras</summary>
+        ExtTriggerSource = 73,
 
-        /// <summary>Enable position jumping</summary>
-        EnablePoseJumping = 57,
+        /// <summary>Execute software trigger for eth cameras</summary>
+        SoftwareTrigger = 74,
 
-        /// <summary>Enable dynamic calibration</summary>
-        EnableDynamicCalibration = 58,
+        /// <summary>Execute software trigger for eth cameras</summary>
+        SoftwareTriggerAllSensors = 75,
 
-        /// <summary>Offset from sensor to depth origin in millimetrers</summary>
-        DepthOffset = 59,
-
-        /// <summary>Power of the LED (light emitting diode), with 0 meaning LED off</summary>
-        LedPower = 60,
-
-        /// <summary>Toggle Zero-Order mode</summary>
-        ZeroOrderEnabled = 61,
-
-        /// <summary>Preserve previous map when starting</summary>
-        EnableMapPreservation = 62,
     }
 }

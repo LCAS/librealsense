@@ -571,6 +571,18 @@ namespace Intel.RealSense
         [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern double rs2_get_time([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ErrorMarshaler))] out object error);
 
+        [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double rs2_d400e_get_heartbeat_time([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ErrorMarshaler))] out object error);
+
+        [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void rs2_d400e_set_heartbeat_time(double time, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ErrorMarshaler))] out object error);
+
+        [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int rs2_d400e_get_buffer_count([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ErrorMarshaler))] out object error);
+
+        [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void rs2_d400e_set_buffer_count(int buffer_count, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ErrorMarshaler))] out object error);
+
 #endregion
 #region rs_advanced_mode
         [DllImport(dllName, CallingConvention = CallingConvention.Cdecl)]

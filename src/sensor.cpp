@@ -336,8 +336,9 @@ namespace librealsense
 
                     frame_continuation release_and_enqueue(continuation, f.pixels);
 
-                    LOG_DEBUG("FrameAccepted," << librealsense::get_string(req_profile_base->get_stream_type())
-                        << ",Counter," << std::dec << fr->additional_data.frame_number
+                    LOG_DEBUG("Serial number:" << this->get_info(RS2_CAMERA_INFO_SERIAL_NUMBER)
+                            <<",FrameAccepted," << librealsense::get_string(req_profile_base->get_stream_type())
+                            <<",Counter," << std::dec << fr->additional_data.frame_number
                             << ",Index," << req_profile_base->get_stream_index()
                             << ",BackEndTS," << std::fixed << f.backend_time
                             << ",SystemTime," << std::fixed << system_time

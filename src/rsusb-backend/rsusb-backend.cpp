@@ -8,6 +8,7 @@
 #include "../hid/hid-types.h"
 #include "../hid/hid-device.h"
 #include "../usb/usb-enumerator.h"
+#include "cs/cs-factory.h"
 
 #include "../tm2/tm-boot.h"
 
@@ -70,6 +71,16 @@ namespace librealsense
         std::vector<hid_device_info> rs_backend::query_hid_devices() const
         {
             return query_hid_devices_info();
+        }
+
+        std::shared_ptr<cs_device> rs_backend::create_cs_device(cs_device_info info) const
+        {
+            return std::make_shared<platform::cs_device>(info);
+        }
+
+        std::vector<cs_device_info> rs_backend::query_cs_devices() const
+        {
+            return cs_info::query_cs_devices();
         }
 
         std::shared_ptr<time_service> rs_backend::create_time_service() const

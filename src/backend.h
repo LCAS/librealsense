@@ -160,10 +160,17 @@ namespace librealsense
             uint8_t         report_type;        // Curently supported: IMU/Custom Temperature
             uint64_t        timestamp;          // Driver-produced/FW-based timestamp. Note that currently only the lower 32bit are used
         };
+
+        struct cs_header
+        {
+            uint8_t         length;
+            uint64_t        timestamp;
+        };
 #pragma pack(pop)
 
         constexpr uint8_t uvc_header_size = sizeof(uvc_header);
         constexpr uint8_t hid_header_size = sizeof(hid_header);
+        constexpr uint8_t cs_header_size = sizeof(cs_header);
 
         struct frame_object
         {
@@ -235,7 +242,39 @@ namespace librealsense
                 (a.conn_spec == b.conn_spec);
         }
 
+        struct cs_device_info
+        {
+            std::string id;
+            uint16_t vid = 0;
+            std::string info;
+            std::string serial;
 
+            operator std::string()
+            {
+                std::stringstream s;
+
+                s << "info- " << info <<
+                  "\nid- " << id <<
+                  "\nvid- " << std::hex << vid <<
+                  "\nserial- " << serial;
+
+                return s.str();
+            }
+
+            bool operator <(const cs_device_info& obj) const
+            {
+                return (std::make_tuple(id, vid, info, serial) < std::make_tuple(obj.id, obj.vid, obj.info, obj.serial));
+            }
+        };
+
+        inline bool operator==(const cs_device_info& a,
+                               const cs_device_info& b)
+        {
+            return  (a.id == b.id) &&
+                    (a.vid == b.vid) &&
+                    (a.serial == b.serial) &&
+                    (a.info == b.info);
+        }
 
         struct playback_device_info
         {
@@ -325,6 +364,8 @@ namespace librealsense
 #pragma pack(pop)
 
         typedef std::function<void(const sensor_data&)> hid_callback;
+
+        class cs_device;
 
         class hid_device
         {
@@ -514,8 +555,18 @@ namespace librealsense
             backend_device_group(const std::vector<uvc_device_info>& uvc_devices, const std::vector<usb_device_info>& usb_devices, const std::vector<hid_device_info>& hid_devices)
                 :uvc_devices(uvc_devices), usb_devices(usb_devices), hid_devices(hid_devices) {}
 
+            //DODANO
+            backend_device_group(const std::vector<uvc_device_info>& uvc_devices,
+                                 const std::vector<usb_device_info>& usb_devices,
+                                 const std::vector<hid_device_info>& hid_devices,
+                                 const std::vector<cs_device_info>& cs_devices)
+                    :uvc_devices(uvc_devices), usb_devices(usb_devices), hid_devices(hid_devices), cs_devices(cs_devices) {}
+
             backend_device_group(const std::vector<usb_device_info>& usb_devices)
                 :usb_devices(usb_devices) {}
+
+            backend_device_group(const std::vector<cs_device_info>& cs_devices)
+                    :cs_devices(cs_devices) {}
 
             backend_device_group(const std::vector<uvc_device_info>& uvc_devices, const std::vector<usb_device_info>& usb_devices)
                 :uvc_devices(uvc_devices), usb_devices(usb_devices) {}
@@ -525,13 +576,15 @@ namespace librealsense
             std::vector<uvc_device_info> uvc_devices;
             std::vector<usb_device_info> usb_devices;
             std::vector<hid_device_info> hid_devices;
+            std::vector<cs_device_info> cs_devices;
             std::vector<playback_device_info> playback_devices;
 
             bool operator == (const backend_device_group& other)
             {
                 return !list_changed(uvc_devices, other.uvc_devices) &&
                     !list_changed(hid_devices, other.hid_devices) &&
-                    !list_changed(playback_devices, other.playback_devices);
+                    !list_changed(playback_devices, other.playback_devices) &&
+                    !list_changed(cs_devices, other.cs_devices);
             }
 
             operator std::string()
@@ -555,6 +608,13 @@ namespace librealsense
                 for (auto hid : hid_devices)
                 {
                     s += hid;
+                    s += "\n\n";
+                }
+
+                s += cs_devices.size()>0 ? "cs devices: \n" : "";
+                for (auto cs : cs_devices)
+                {
+                    s += cs;
                     s += "\n\n";
                 }
 
@@ -584,6 +644,11 @@ namespace librealsense
 
             virtual std::shared_ptr<hid_device> create_hid_device(hid_device_info info) const = 0;
             virtual std::vector<hid_device_info> query_hid_devices() const = 0;
+
+#ifndef SKIP_CS_SUPPORT
+            virtual std::shared_ptr<cs_device> create_cs_device(cs_device_info info) const = 0;
+#endif
+            virtual std::vector<cs_device_info> query_cs_devices() const = 0;
 
             virtual std::shared_ptr<time_service> create_time_service() const = 0;
 

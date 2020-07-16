@@ -4,6 +4,12 @@
 
 > Check out [www.jetsonhacks.com](http://www.jetsonhacks.com/) for great content on everything Jetson! (not affiliated with Intel RealSense)
 
+## FRAMOS D400e cameras
+
+This version of **Intel® RealSense™ SDK 2.0** is modified to support FRAMOS D400e cameras. Please refer to the file **ReadMe.txt** for instructions on how to install and use the library with D400e cameras. 
+
+The information in this readme file (**installation_jetson.md**) does not apply to FRAMOS D400e cameras.
+
 ## Getting started
 
 1. **Prerequisites:**

@@ -5,12 +5,12 @@
 ##              Align Depth to Color               ##
 #####################################################
 
-# First import the library
-import pyrealsense2 as rs
 # Import Numpy for easy array manipulation
 import numpy as np
 # Import OpenCV for easy image rendering
 import cv2
+# Import the library
+import pyrealsense2 as rs
 
 # Create a pipeline
 pipeline = rs.pipeline()
