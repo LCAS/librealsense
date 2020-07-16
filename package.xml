@@ -31,11 +31,14 @@
   <build_depend>pkg-config</build_depend>
 
   <depend>libusb-1.0-dev</depend>
+  <depend>gtk3</depend>
   <depend>linux-headers-generic</depend>
   <depend>libssl-dev</depend>
   <depend>dkms</depend>
   <depend>udev</depend>
   <depend>framoscamerasuite</depend>
+  <depend>libglfw3-dev</depend>
+  <depend>opengl</depend>
 
   <export>
     <build_type>cmake</build_type>
