@@ -2,7 +2,7 @@
 Copyright(c) 2017 Intel Corporation. All Rights Reserved. */
 
 #include "python.hpp"
-#include "../include/librealsense2/hpp/rs_sensor.hpp"
+#include "../include/librealsense2-framos/hpp/rs_sensor.hpp"
 
 void init_sensor(py::module &m) {
     /** rs_sensor.hpp **/

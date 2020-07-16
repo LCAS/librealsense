@@ -49,7 +49,7 @@ Windows users can install the RealSense SDK 2.0 from the release tab to get pre-
   * `sudo make install`
 4. update your PYTHONPATH environment variable to add the path to the pyrealsense library
   * `export PYTHONPATH=$PYTHONPATH:/usr/local/lib`
-5. Alternatively, copy the build output (`librealsense2.so` and `pyrealsense2.so`) next to your script.
+5. Alternatively, copy the build output (`librealsense2-framos.so` and `pyrealsense2.so`) next to your script.
   * **Note:** Python 3 module filenames may contain additional information, e.g. `pyrealsense2.cpython-35m-arm-linux-gnueabihf.so`)
 
 
@@ -62,7 +62,7 @@ For example: `-DPYTHON_EXECUTABLE=C:/Python27/python.exe`
 > The precompiled binaries shipped with [the installer](https://github.com/IntelRealSense/librealsense/releases) assume **Python 2.7**.
 >The error `ImportError: DLL load failed: The specified module could not be found` might indicate versions mismatch or architecture (x86 vs x64) mismatch.
 
-4. Open `librealsense2.sln` that was created in the previous step, and build the `pyrealsense2` project
+4. Open `librealsense2-framos.sln` that was created in the previous step, and build the `pyrealsense2` project
 5. Open the output folder of the project (e.g `build\x64-Release\Release\`) and copy `pyrealsense2.pyd` into your python's `site-packages` (e.g `C:\Python27\Lib\site-packages`)
 6. Alternatively, copy the build output (`realsense2.dll` and `pyrealsense2.pyd`) next to your script.
 

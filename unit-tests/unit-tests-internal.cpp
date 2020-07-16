@@ -12,10 +12,10 @@
 #include <algorithm>
 
 #include "unit-tests-common.h"
-#include "../include/librealsense2/rs_advanced_mode.hpp"
-#include "../include/librealsense2/hpp/rs_frame.hpp"
-#include "../include/librealsense2/hpp/rs_processing.hpp"
-#include <librealsense2/hpp/rs_frame.hpp>
+#include "../include/librealsense2-framos/rs_advanced_mode.hpp"
+#include "../include/librealsense2-framos/hpp/rs_frame.hpp"
+#include "../include/librealsense2-framos/hpp/rs_processing.hpp"
+#include <librealsense2-framos/hpp/rs_frame.hpp>
 #include <../src/proc/synthetic-stream.h>
 #include <../src/proc/disparity-transform.h>
 #include <../src/proc/spatial-filter.h>

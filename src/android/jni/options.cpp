@@ -4,7 +4,7 @@
 #include <jni.h>
 #include "error.h"
 
-#include "../../../include/librealsense2/rs.h"
+#include "../../../include/librealsense2-framos/rs.h"
 
 extern "C" JNIEXPORT jboolean JNICALL
 Java_com_intel_realsense_librealsense_Options_nSupports(JNIEnv *env, jclass type, jlong handle, jint option) {

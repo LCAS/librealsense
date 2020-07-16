@@ -34,7 +34,7 @@
 #include "proc/rates-printer.h"
 #include "media/playback/playback_device.h"
 #include "stream.h"
-#include "../include/librealsense2/h/rs_types.h"
+#include "../include/librealsense2-framos/h/rs_types.h"
 #include "pipeline/pipeline.h"
 #include "environment.h"
 #include "proc/temporal-filter.h"

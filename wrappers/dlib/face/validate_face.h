@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <librealsense2/rs.hpp>   // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp>   // Include RealSense Cross Platform API
 #include <dlib/image_processing/full_object_detection.h>
 #include "markup_68.h"
 

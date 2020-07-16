@@ -30,7 +30,7 @@ Checkboxes below allow toggling between depth to color vs color to depth alignme
 
 This example is using standard `librealsense` API and `IMGUI` library for simple UI rendering:
 ```cpp
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "../example.hpp"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"

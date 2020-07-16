@@ -2,15 +2,15 @@
 
 # File-System Structure
 
-Under `librealsense2` folder you will find two subfolers:
-* [h](./librealsense2/h) - Contains headers for the C language
-* [hpp](./librealsense2/hpp) - Contains headers for the C++ language, depends on C headers
+Under `librealsense2-framos` folder you will find two subfolers:
+* [h](./librealsense2-framos/h) - Contains headers for the C language
+* [hpp](./librealsense2-framos/hpp) - Contains headers for the C++ language, depends on C headers
 
-In addition, you can include [<librealsense2/rs.h>](./librealsense2/rs.h) and [<librealsense2/rs.hpp>](./librealsense2/rs.hpp) to get most of SDK functionality in C and C++ respectively. 
+In addition, you can include [<librealsense2-framos/rs.h>](./librealsense2-framos/rs.h) and [<librealsense2-framos/rs.hpp>](./librealsense2-framos/rs.hpp) to get most of SDK functionality in C and C++ respectively. 
 
-[<librealsense2/rs_advanced_mode.h>](./librealsense2/rs_advanced_mode.h) and [<librealsense2/rs_advanced_mode.hpp>](./librealsense2/rs_advanced_mode.hpp) can be included to get the extra [Advanced Mode](../doc/rs400_advanced_mode.md) functionality (in C and C++ respectively).
+[<librealsense2-framos/rs_advanced_mode.h>](./librealsense2-framos/rs_advanced_mode.h) and [<librealsense2-framos/rs_advanced_mode.hpp>](./librealsense2-framos/rs_advanced_mode.hpp) can be included to get the extra [Advanced Mode](../doc/rs400_advanced_mode.md) functionality (in C and C++ respectively).
 
-[<librealsense2/rsutil.h>](./librealsense2/rsutil.h) contains mathematical helper functions for projection of 2D points into 3D space and back. 
+[<librealsense2-framos/rsutil.h>](./librealsense2-framos/rsutil.h) contains mathematical helper functions for projection of 2D points into 3D space and back. 
 
 # Files and Classes
 

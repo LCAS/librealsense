@@ -5,7 +5,7 @@
 #include "usb/usb-enumerator.h"
 #include "usb/usb-device.h"
 #include "hw-monitor.h"
-#include "librealsense2/h/rs_option.h"
+#include "librealsense2-framos/h/rs_option.h"
 #include <map>
 
 using namespace librealsense::platform;

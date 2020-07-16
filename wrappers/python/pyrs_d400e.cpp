@@ -2,7 +2,7 @@
 // Copyright(c) 2020 FRAMOS GmbH.
 
 #include "python.hpp"
-#include "../include/librealsense2/hpp/rs_d400e.hpp"
+#include "../include/librealsense2-framos/hpp/rs_d400e.hpp"
 
 void init_d400e(py::module& m) {
     /* rs2_d400e.hpp */

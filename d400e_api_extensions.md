@@ -11,7 +11,7 @@ Heartbeat time in seconds can be acquired and set using the extended librealsens
 C++
 
 ```cpp
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 ```
 ```cpp
 float heartbeat_time_s = rs2::d400e::get_heartbeat_time();
@@ -21,7 +21,7 @@ rs2::d400e::set_heartbeat_time(3.f);
 C
 
 ```c
-#include <librealsense2/rs.h>
+#include <librealsense2-framos/rs.h>
 ```
 ```c
 rs2_error* e = 0;
@@ -56,7 +56,7 @@ Buffer count can be acquired and set using the extended librealsense2 API. All D
 C++
 
 ```cpp
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 ```
 ```cpp
 int buffer_count = rs2::d400e::get_buffer_count();
@@ -66,7 +66,7 @@ rs2::d400e::set_buffer_count(10);
 C
 
 ```c
-#include <librealsense2/rs.h>
+#include <librealsense2-framos/rs.h>
 ```
 ```c
 rs2_error* e = 0;
@@ -94,7 +94,7 @@ D400e.SetBufferCount(10);
 
 ## Camera information
 
-Available camera information in the librealsense2 API is listed in the `rs2_camera_info`  enumeration available in the `librealsense2/h/rs_sensor.h` header file. This enumeration was extended to provide information specific to D400e cameras.
+Available camera information in the librealsense2 API is listed in the `rs2_camera_info`  enumeration available in the `librealsense2-framos-framos/h/rs_sensor.h` header file. This enumeration was extended to provide information specific to D400e cameras.
 
 The `RS2_CAMERA_INFO_DEVICE_VERSION` enumerator represents FRAMOS firmware version on a D400e camera. This value is different from the `RS2_CAMERA_INFO_FIRMWARE_VERSION` enumerator which represents the Intel D4 firmware version.
 
@@ -140,7 +140,7 @@ String ipAddress = device.Info[CameraInfo.IpAddress];
 
 ## Sensor Options
 
-Available sensor options in the librealsense2 API are listed in the `rs2_option` enumeration available in the `librealsense2/h/rs_option.h` header file. This enumeration was extended to provide options specific to D400e cameras.
+Available sensor options in the librealsense2 API are listed in the `rs2_option` enumeration available in the `librealsense2-framos-framos/h/rs_option.h` header file. This enumeration was extended to provide options specific to D400e cameras.
 
 The `RS2_OPTION_INTER_PACKET_DELAY` enumerator represents the delay in microseconds between stream packets that the camera sends to the host. The library automatically detects optimal value for this option on initialization.
 

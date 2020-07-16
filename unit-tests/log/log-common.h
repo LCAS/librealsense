@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <librealsense2/rs.hpp>   // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp>   // Include RealSense Cross Platform API
 
 #include <easylogging++.h>
 #ifdef BUILD_SHARED_LIBS

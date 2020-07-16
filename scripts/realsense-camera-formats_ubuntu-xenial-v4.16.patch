@@ -126,7 +126,7 @@ index 1d0b220..56df662 100644
  MODULE_DESCRIPTION("Device registrar for Video4Linux drivers v2");
  MODULE_LICENSE("GPL");
  MODULE_ALIAS_CHARDEV_MAJOR(VIDEO_MAJOR);
-+MODULE_VERSION("librealsense2-patch");
++MODULE_VERSION("librealsense2-framos-patch");
 diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
 index 260288c..53c66dc 100644
 --- a/drivers/media/v4l2-core/v4l2-ioctl.c

@@ -20,7 +20,7 @@
 #define LRS_EXTENSION_API
 #endif
 
-#include "../include/librealsense2/hpp/rs_types.hpp"
+#include "../include/librealsense2-framos/hpp/rs_types.hpp"
 
 #ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES

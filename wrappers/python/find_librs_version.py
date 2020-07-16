@@ -11,7 +11,7 @@ if len(sys.argv) < 3:
 librealsense_dir = sys.argv[1]
 output_dir = sys.argv[2]
 
-rs_h_path = os.path.join(librealsense_dir, 'include/librealsense2/rs.h')
+rs_h_path = os.path.join(librealsense_dir, 'include/librealsense2-framos/rs.h')
 print("Extracting version from: ", rs_h_path)
 with io.open(rs_h_path, 'r') as f:
     file_content = f.read()

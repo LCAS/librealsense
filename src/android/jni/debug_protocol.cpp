@@ -9,8 +9,8 @@
 #include <fstream>
 #include <string>
 
-#include "../../../include/librealsense2/rs.h"
-#include "../../../include/librealsense2/hpp/rs_device.hpp"
+#include "../../../include/librealsense2-framos/rs.h"
+#include "../../../include/librealsense2-framos/hpp/rs_device.hpp"
 #include "../../api.h"
 #include "../../../common/parser.hpp"
 

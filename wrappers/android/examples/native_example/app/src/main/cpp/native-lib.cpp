@@ -1,5 +1,5 @@
 #include <jni.h>
-#include "librealsense2/rs.hpp"
+#include "librealsense2-framos/rs.hpp"
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_realsense_1native_1example_MainActivity_nGetLibrealsenseVersionFromJNI(JNIEnv *env, jclass type) {

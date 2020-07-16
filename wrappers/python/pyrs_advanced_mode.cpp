@@ -2,7 +2,7 @@
 Copyright(c) 2017 Intel Corporation. All Rights Reserved. */
 
 #include "python.hpp"
-#include "../include/librealsense2/rs_advanced_mode.hpp"
+#include "../include/librealsense2-framos/rs_advanced_mode.hpp"
 
 void init_advanced_mode(py::module &m) {
     /** RS400 Advanced Mode commands **/

@@ -76,7 +76,7 @@ if(BUILD_GRAPHICAL_EXAMPLES)
     target_link_libraries(rs-depth-quality ${DEPENDENCIES}
                                            ${GTK3_LIBRARIES}
                                            Threads::Threads
-                                           realsense2-gl)
+                                           realsense2-framos-gl)
 
     if (IMPORT_DEPTH_CAM_FW)
         add_definitions(-DINTERNAL_FW)

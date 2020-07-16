@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include <rs-vino/openvino-helpers.h>  // include all the InferenceEngine headers
 #include <string>
 

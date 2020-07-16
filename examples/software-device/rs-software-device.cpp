@@ -1,8 +1,8 @@
 // License: Apache 2.0. See LICENSE file in root directory.
 // Copyright(c) 2017 Intel Corporation. All Rights Reserved.
 
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
-#include <librealsense2/hpp/rs_internal.hpp>
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/hpp/rs_internal.hpp>
 #include "example.hpp"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION

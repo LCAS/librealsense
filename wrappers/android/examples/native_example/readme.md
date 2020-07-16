@@ -62,7 +62,7 @@ Your native app need to link with 'librealsense.so' in order to do that you will
 #### Add RealSense Library
 >```java
 >    include_directories("${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/include")
->    add_library(realsense2 SHARED IMPORTED)
+>    add_library(realsense2-framos SHARED IMPORTED)
 >    set_target_properties(
 >        realsense2
 >        PROPERTIES

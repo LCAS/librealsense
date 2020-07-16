@@ -2,7 +2,7 @@
 
 #### Using pre-build packages
 **Intel® RealSense™ SDK 2.0** provides installation packages for Intel X86/AMD64-based Debian distributions in [`dpkg`](https://en.wikipedia.org/wiki/Dpkg) format for Ubuntu 16/18 [LTS](https://wiki.ubuntu.com/LTS).    
-The Realsense [DKMS](https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support) kernel drivers package (`librealsense2-dkms`) supports Ubuntu LTS kernels 4.4, 4.8, 4.10, 4.13, 4.15, 4.18* 5.0* and 5.3*. Please refer to [Ubuntu Kernel Release Schedule](https://wiki.ubuntu.com/Kernel/Support) for further details.
+The Realsense [DKMS](https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support) kernel drivers package (`librealsense2-framos-dkms`) supports Ubuntu LTS kernels 4.4, 4.8, 4.10, 4.13, 4.15, 4.18* 5.0* and 5.3*. Please refer to [Ubuntu Kernel Release Schedule](https://wiki.ubuntu.com/Kernel/Support) for further details.
 
 #### Configuring and building from the source code
 While we strongly recommend to use DKMS package whenever possible, there are certain cases where installing and patching the system manually is necessary:
@@ -53,7 +53,7 @@ To upgrade selected packages only a more granular approach can be applied:
   `sudo apt-get --only-upgrade install  librealsense2-utils librealsense2-dkms`  
 
 ## Uninstalling the Packages:
-**Important** Removing Debian package is allowed only when no other installed packages directly refer to it. For example removing `librealsense2-udev-rules` requires `librealsense2` to be removed first.
+**Important** Removing Debian package is allowed only when no other installed packages directly refer to it. For example removing `librealsense2-framos-udev-rules` requires `librealsense2-framos` to be removed first.
 
 Remove a single package with:   
   `sudo apt-get purge <package-name>`  

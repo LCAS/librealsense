@@ -17,7 +17,7 @@
 #include <opengl3.h>
 
 #include <imgui_internal.h>
-#include <librealsense2/rsutil.h>
+#include <librealsense2-framos/rsutil.h>
 
 #define ARCBALL_CAMERA_IMPLEMENTATION
 #include <arcball_camera.h>

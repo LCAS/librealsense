@@ -31,4 +31,4 @@
 ```
 install_name_tool -change /usr/local/opt/libusb/lib/libusb-1.0.0.dylib @rpath/libusb-1.0.0.dylib librealsense2.dylib
 ```
-2. Copy `libusb-1.0.0.dylib` and `librealsense2.dylib` to your application's `Frameworks` folder
+2. Copy `libusb-1.0.0.dylib` and `librealsense2-framos.dylib` to your application's `Frameworks` folder

@@ -16,8 +16,8 @@ The application should open a window in which it shows one of the fisheye stream
 
 First, we include the Intel® RealSense™ Cross-Platform API.
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
-#include <librealsense2/rsutil.h>
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rsutil.h>
 ```
 
 Then, we define some auxiliary types and functions. We define a "virtual object" as a

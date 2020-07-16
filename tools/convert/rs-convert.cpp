@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "librealsense2/rs.hpp"
+#include "librealsense2-framos/rs.hpp"
 
 #include "tclap/CmdLine.h"
 

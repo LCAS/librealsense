@@ -4,7 +4,7 @@
 #ifndef LIBREALSENSE_RS2_PROCESSING_GL_HPP
 #define LIBREALSENSE_RS2_PROCESSING_GL_HPP
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "rs_processing_gl.h"
 
 #include <memory>

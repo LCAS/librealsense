@@ -8,7 +8,7 @@
 
 // Types
 #include <stdint.h>
-#include "../../include/librealsense2/rs.h"
+#include "../../include/librealsense2-framos/rs.h"
 #include "assert.h"
 //#include "../types.h"
 

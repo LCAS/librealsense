@@ -14,7 +14,7 @@ If you are using OpenCV, `imshow` is a good alternative.
 First, we include the Intel® RealSense™ Cross-Platform API.  
 All but advanced functionality is provided through a single header:
 ```cpp
-#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
 ```
 
 Next, we include a [very short helper library](../example.hpp) to encapsulate OpenGL rendering and window management:

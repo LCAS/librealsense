@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "error.h"
-#include "../../../include/librealsense2/rs.h"
+#include "../../../include/librealsense2-framos/rs.h"
 #include "../fw-logger/rs-fw-logger.h"
 
 std::shared_ptr<android_fw_logger> g_fw_logger;

@@ -2,7 +2,7 @@
 // Copyright(c) 2015 Intel Corporation. All Rights Reserved.
 
 #include <numeric>
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "depth-quality-model.h"
 
 int main(int argc, const char * argv[]) try

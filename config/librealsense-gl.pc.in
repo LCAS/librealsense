@@ -4,7 +4,7 @@ includedir=${prefix}/include
 #TODO: libdir=${exec_prefix}/lib@MULTI_ARCH_SUFFIX@
 libdir= ${prefix}/lib/x86_64-linux-gnu
 
-Name: realsense2-gl
+Name: realsense2-framos-gl
 Description: Intel(R) RealSense(tm) GLSL Extension Module
 Version: @REALSENSE-GL_VERSION_STRING@
 URL: https://github.com/IntelRealSense/librealsense

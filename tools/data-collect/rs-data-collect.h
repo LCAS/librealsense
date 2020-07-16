@@ -24,7 +24,7 @@ GYRO,1,1,200,MOTION_XYZ32F
 #POSE,0,0,262,6DOF,0
 */
 
-#include <librealsense2/rs.hpp>
+#include <librealsense2-framos/rs.hpp>
 #include "tclap/CmdLine.h"
 #include <fstream>
 #include <sstream>
