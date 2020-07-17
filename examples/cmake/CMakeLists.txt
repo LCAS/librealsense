@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(hello_librealsense2-framos)
 
-# Find librealsense2 installed package
+# Find librealsense2-framos installed package
 find_package(realsense2-framos REQUIRED)
 
 # Enable C++11

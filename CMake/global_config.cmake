@@ -73,7 +73,7 @@ macro(global_set_flags)
 endmacro()
 
 macro(global_target_config)
-    target_link_libraries(${LRS_TARGET} PRIVATE realsense-file ${CMAKE_THREAD_LIBS_INIT})
+    target_link_libraries(${LRS_TARGET} PRIVATE realsense-file-framos ${CMAKE_THREAD_LIBS_INIT})
 
     include_directories(${LRS_TARGET} src)
 

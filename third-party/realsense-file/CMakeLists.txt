@@ -25,14 +25,14 @@ source_group("Header Files\\boost" REGULAR_EXPRESSION
          boost/boost/*.hpp
         )
 
-add_library(${PROJECT_NAME} STATIC
+add_library(${PROJECT_NAME}-framos STATIC
     ${AllSources}
     ${HEADER_FILES_ROSBAG}
     ${SOURCE_FILES_ROSBAG}
     ${SOURCE_FILES_COMPRESSION}
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE
+target_include_directories(${PROJECT_NAME}-framos PRIVATE
         ${ROSBAG_HEADER_DIRS}
         ${BOOST_INCLUDE_PATH}
         ${LZ4_INCLUDE_PATH}
@@ -40,12 +40,12 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 #set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${LIBVERSION}" SOVERSION "${LIBSOVERSION}")
 
-set_target_properties (${PROJECT_NAME} PROPERTIES FOLDER Library)
+set_target_properties (${PROJECT_NAME}-framos PROPERTIES FOLDER Library)
 
 set(CMAKECONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/../cmake/realsense2")
 
-install(TARGETS ${PROJECT_NAME}
-    EXPORT realsense2Targets
+install(TARGETS ${PROJECT_NAME}-framos
+    EXPORT realsense2-framosTargets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
