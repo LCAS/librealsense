@@ -12,7 +12,6 @@
   Library for capturing data from the Intel(R) RealSense(TM) SR300, D400 Depth cameras and T2xx Tracking devices. This effort was initiated to better support researchers, creative coders, and app developers in domains such as robotics, virtual reality, and the internet of things. Several often-requested features of RealSense(TM); devices are implemented in this project. Includes the extensions for the FRAMOS camera.
   </description>
 
-  <maintainer email="sergey.dorodnicov@intel.com">Sergey Dorodnicov</maintainer>
   <maintainer email="marc@hanheide.net">Marc Hanheide</maintainer>
   <maintainer email="ntsagkopoulos@sagarobotics.com">Nikolas Tsagkopoulos</maintainer>
 
