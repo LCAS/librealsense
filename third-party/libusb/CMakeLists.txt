@@ -91,7 +91,7 @@ endif()
 #set_target_properties(usb PROPERTIES PREFIX "")
 
 install(TARGETS ${PROJECT_NAME}
-    EXPORT realsense2Targets
+    EXPORT realsense2-framosTargets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
