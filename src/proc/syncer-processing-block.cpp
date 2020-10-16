@@ -10,8 +10,8 @@
 
 namespace librealsense
 {
-    syncer_process_unit::syncer_process_unit(std::shared_ptr<bool_option> is_enabled_opt)
-        : processing_block("syncer"), _matcher((new timestamp_composite_matcher({}))), _is_enabled_opt(is_enabled_opt)
+    syncer_process_unit::syncer_process_unit(std::shared_ptr<bool_option> is_enabled_opt, rs2_syncer_mode syncer_mode, std::vector<std::shared_ptr<matcher>> matchers)
+        : processing_block("syncer"), _matcher((new timestamp_composite_matcher(matchers, syncer_mode))), _is_enabled_opt(is_enabled_opt)
     {
         _matcher->set_callback([this](frame_holder f, syncronization_environment env)
         {

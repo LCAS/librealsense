@@ -1,5 +1,5 @@
 #pragma once
-#include "librealsense2-framos/rs.hpp"
+#include "librealsense2/rs.hpp"
 #include <type_traits>
 
 // extra checks to help specialization priority resoultion

@@ -364,8 +364,10 @@ int main(int argc, const char** argv) try
                     if (get_device_name(dev_model->dev) == device_names[i]) skip = true;
                 if (skip) continue;
 
-                if (ImGui::Selectable(device_names[i].first.c_str(), false, ImGuiSelectableFlags_SpanAllColumns)/* || switch_to_newly_loaded_device*/)
-                {
+				std::string extendedLabel = device_names[i].first;
+				extendedLabel += "##" + device_names[i].second;
+				if (ImGui::Selectable(extendedLabel.c_str(), false, ImGuiSelectableFlags_SpanAllColumns)/* || switch_to_newly_loaded_device*/)
+				{
                     try
                     {
                         auto dev = connected_devs[i];

@@ -6,7 +6,6 @@
 #include "global_timestamp_reader.h"
 #include "stream.h"
 #include "device.h"
-#include <regex>
 
 #include <array>
 #include <set>
@@ -18,23 +17,30 @@ namespace librealsense {
     cs_firmware_version::cs_firmware_version(smcs::IDevice &device)
         : _major(0), _minor(0), _patch(0), _build(0)
     {
-        auto device_version = device->GetDeviceVersion();
-        std::smatch match;
-        if (std::regex_search(device_version, match, std::regex("FW:([0-9])\\.([0-9])\\.([0-9])\\.([0-9])")))
-        {
-            try
-            {
-                _major = std::stoi(match[1]);
-                _minor = std::stoi(match[2]);
-                _patch = std::stoi(match[3]);
-                _build = std::stoi(match[4]);
-            }
-            catch (...)
-            {
+        auto device_version = device->GetDeviceVersion();        
+        std::string delimiter = "FW:";
+        device_version.erase(0, device_version.find(delimiter) + delimiter.length());
 
-            }
+        std::vector<std::string> token;
+        delimiter = ".";
+        size_t pos = 0;
+        while ((pos = device_version.find(delimiter)) != std::string::npos) {
+            token.push_back(device_version.substr(0, pos));
+            device_version.erase(0, pos + delimiter.length());
         }
+        token.push_back(device_version);
+        
+        try
+        {
+            _major = std::stoi(token[0]);
+            _minor = std::stoi(token[1]);
+            _patch = std::stoi(token[2]);
+            _build = std::stoi(token[3]);
+        }
+        catch (...)
+        {
 
+        }
     }
 
     cs_sensor::cs_sensor(std::string name,
@@ -417,6 +423,8 @@ namespace librealsense {
                     _temperature_supported(false),
                     _software_trigger_supported_checked(false),
                     _software_trigger_supported(false),
+                    _line_debouncer_time_supported_checked(false),
+                    _line_debouncer_time_supported(false),
                     _selected_source(0),
                     _selected_source_initialized(false) {
             _smcs_api = smcs::GetCameraAPI();
@@ -438,17 +446,17 @@ namespace librealsense {
                             else {
                                 // initialize this part (inter-packet delay) only once
                                 if (get_device_init_flag_sn(_device_info.serial) == false) { 
-                                    INT64 numOfCameraStream;
-                                    _connected_device->GetIntegerNodeValue("GevStreamChannelCount", numOfCameraStream);
-                                    for (int i = 0; i < numOfCameraStream; i++)
+                                    INT64 stream_count, link_speed_mbitps;
+                                    _connected_device->GetIntegerNodeValue("GevStreamChannelCount", stream_count);
+                                    _connected_device->GetIntegerNodeValue("GevLinkSpeed", link_speed_mbitps);
+                                    for (int i = 0; i < stream_count; i++)
                                     {
-                                        INT64 packetSize;
+                                        INT64 packet_size_bytes;
                                         select_channel((cs_stream)i);
 
-                                        // set optimal inter-packet delay
-                                        _connected_device->GetIntegerNodeValue("GevSCPSPacketSize", packetSize);
-                                        int interPacketDelay = get_optimal_inter_packet_delay(packetSize);
-                                        _connected_device->SetIntegerNodeValue("GevSCPD", interPacketDelay);
+                                        _connected_device->GetIntegerNodeValue("GevSCPSPacketSize", packet_size_bytes);
+                                        INT64 inter_packet_delay_us = get_optimal_inter_packet_delay(packet_size_bytes, link_speed_mbitps);
+                                        _connected_device->SetIntegerNodeValue("GevSCPD", inter_packet_delay_us);
                                     }
                                     set_device_init_flag_sn(_device_info.serial, true);
                                 }
@@ -463,11 +471,11 @@ namespace librealsense {
                         _profiles = std::vector<stream_profile>(_number_of_streams);
                         _cs_firmware_version = cs_firmware_version(_connected_device);
 
-                        constexpr double S_TO_MS_FACTOR = 1000;
+                        constexpr double s_to_ms_factor = 1000;
                         INT64 frequency;
                         if (!_connected_device->GetIntegerNodeValue("GevTimestampTickFrequency", frequency))
                             throw io_exception("Unable to read GevTimestampTickFrequency");
-                        _timestamp_to_ms_factor = S_TO_MS_FACTOR / frequency;
+                        _timestamp_to_ms_factor = s_to_ms_factor / frequency;
 
                         for (int i = 0; i < _number_of_streams; i++)
                         {
@@ -782,6 +790,9 @@ namespace librealsense {
                     if (!select_source(stream))
                         return false;
 
+                    if (!_connected_device->SetStringNodeValue("LineSelector", "Line1"))
+                        return false;
+
                     if (value == 1) return _connected_device->SetStringNodeValue(get_cs_param_name(option, stream), "VSync");
                     else if (value == 0) return _connected_device->SetStringNodeValue(get_cs_param_name(option, stream), "UserOutput1");
                 }                
@@ -812,7 +823,7 @@ namespace librealsense {
                     _connected_device->GetStringNodeValue("TriggerMode", trigger_mode);
                     if (trigger_mode == "Off") 
                         return false;
-                    
+
                     if (value == 1) return _connected_device->SetStringNodeValue("TriggerSource", "Line1");
                     else if (value == 2) return _connected_device->SetStringNodeValue("TriggerSource", "Software");
 
@@ -824,6 +835,16 @@ namespace librealsense {
 
                     if (value == CS_USER_OUTPUT_LEVEL_LOW) return _connected_device->SetBooleanNodeValue("UserOutputValue", false);
                     else if (value == CS_USER_OUTPUT_LEVEL_HIGH) return _connected_device->SetBooleanNodeValue("UserOutputValue", true);
+                }
+                case RS2_OPTION_LINE_DEBOUNCER_TIME:
+                {
+                    if (!select_source(stream))
+                        return false;
+                    
+                    if (!_connected_device->SetStringNodeValue("LineSelector", "Line2"))
+                        return false;
+
+                    return _connected_device->SetFloatNodeValue(get_cs_param_name(option, stream), (double)value);
                 }
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
             }
@@ -891,6 +912,7 @@ namespace librealsense {
                 case RS2_OPTION_ASIC_TEMPERATURE: return std::string("IntelASIC");
                 case RS2_OPTION_PROJECTOR_TEMPERATURE: return std::string("DepthModule");
                 case RS2_OPTION_OUTPUT_TRIGGER_ENABLED: return std::string("LineSource");
+                case RS2_OPTION_LINE_DEBOUNCER_TIME: return std::string("LineDebouncerTime");
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
             }
         }
@@ -899,6 +921,7 @@ namespace librealsense {
         {
             smcs::StringList node_value_list;
             INT64 int_value;
+            double float_value;
             bool status;
 
             switch(option)
@@ -936,6 +959,12 @@ namespace librealsense {
                     status = _connected_device->GetEnumNodeValuesList(get_cs_param_name(option, stream), node_value_list);
                     value = 0;
                     return status;
+                case RS2_OPTION_LINE_DEBOUNCER_TIME: 
+                {
+                    status = _connected_device->GetFloatNodeMin(get_cs_param_name(option, stream), float_value);
+                    value = static_cast<int32_t>(float_value);
+                    return status;
+                }
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
             }
         }
@@ -944,6 +973,7 @@ namespace librealsense {
         {
             smcs::StringList node_value_list;
             INT64 int_value;
+            double float_value;
             bool status;
 
             switch(option)
@@ -981,6 +1011,12 @@ namespace librealsense {
                     status = _connected_device->GetEnumNodeValuesList(get_cs_param_name(option, stream), node_value_list);
                     value = 1;
                     return status;
+                case RS2_OPTION_LINE_DEBOUNCER_TIME:
+                {
+                    status = _connected_device->GetFloatNodeMax(get_cs_param_name(option, stream), float_value);
+                    value = static_cast<int32_t>(float_value);
+                    return status;
+                }
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
             }
         }
@@ -988,6 +1024,7 @@ namespace librealsense {
         bool cs_device::get_cs_param_step(rs2_option option, int32_t& step, cs_stream stream)
         {
             INT64 int_value;
+            double float_value; 
 
             switch(option)
             {
@@ -1027,6 +1064,12 @@ namespace librealsense {
                 {
                     step = 1;
                     return true;
+                }
+                case RS2_OPTION_LINE_DEBOUNCER_TIME:
+                {
+                    auto result = _connected_device->GetFloatNodeIncrement(get_cs_param_name(option, stream), float_value);
+                    step = static_cast<int32_t>(float_value);
+                    return result;
                 }
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
             }
@@ -1093,6 +1136,9 @@ namespace librealsense {
                 {
                     if (!select_source(stream))
                         return false;
+                        
+                    if (!_connected_device->SetStringNodeValue("LineSelector", "Line1"))
+                        return false;
 
                     status = _connected_device->GetStringNodeValue(get_cs_param_name(option, stream), string_value);
                     if (string_value == "VSync") value = 1;
@@ -1152,6 +1198,19 @@ namespace librealsense {
                     if (user_output_level == false) value = CS_USER_OUTPUT_LEVEL_LOW;
                     else value = CS_USER_OUTPUT_LEVEL_HIGH;
 
+                    return status;
+                }
+                case RS2_OPTION_LINE_DEBOUNCER_TIME:
+                {
+                    if (!select_source(stream))
+                        return false;
+                    
+                    if (!_connected_device->SetStringNodeValue("LineSelector", "Line2"))
+                        return false;
+
+                    double line_debouncer_time;
+                    status = _connected_device->GetFloatNodeValue(get_cs_param_name(option, stream), line_debouncer_time);
+                    value = static_cast<int32_t>(line_debouncer_time);
                     return status;
                 }
                 default: throw linux_backend_exception(to_string() << "no CS cid for option " << option);
@@ -1591,6 +1650,17 @@ namespace librealsense {
             return _software_trigger_supported;
         }
 
+        bool cs_device::is_line_debouncer_time_supported()
+        {
+            if (!_line_debouncer_time_supported_checked) {
+                _line_debouncer_time_supported =
+                (_cs_firmware_version >= cs_firmware_version(1, 8, 0, 2) && (_device_info.id == CS_CAMERA_MODEL_D435e) ||
+                (_cs_firmware_version >= cs_firmware_version(1, 3, 0, 2) && (_device_info.id == CS_CAMERA_MODEL_D415e)));
+                _line_debouncer_time_supported_checked = true;
+            }
+            return _line_debouncer_time_supported;
+        }
+
         void cs_device::capture_loop(cs_stream stream, UINT32 channel)
         {
             try
@@ -1834,15 +1904,17 @@ namespace librealsense {
             }
         }
 
-        int cs_device::get_optimal_inter_packet_delay(int packet_size)
+        INT64 cs_device::get_optimal_inter_packet_delay(INT64 packet_size_bytes, INT64 link_speed_mbitps)
         {
-            double eth_packet_size = packet_size + 38;  // 38 bytes overhead
-            float ns_per_byte = 8.0;  // for 1Gbps
+            constexpr int eth_packet_overhead = 38;
+            double eth_packet_size = packet_size_bytes + eth_packet_overhead;
+            constexpr float mbitps_to_nspbyte_factor = 0.008;
+            float ns_per_byte = link_speed_mbitps * mbitps_to_nspbyte_factor;
+            constexpr float ns_to_ms_factor = 0.001;
+            double time_to_transfer_packet_us = eth_packet_size * ns_per_byte * ns_to_ms_factor;
+            time_to_transfer_packet_us = ceil(time_to_transfer_packet_us + 0.5);
 
-            double time_to_transfer_packet = (eth_packet_size * ns_per_byte) / 1000.0;  // time in us
-            time_to_transfer_packet = ceil(time_to_transfer_packet + 0.5);            // round up
-
-            return static_cast<int>(time_to_transfer_packet);
+            return static_cast<INT64>(time_to_transfer_packet_us);
         }
 
         bool cs_device::inc_device_count_sn(std::string serial_num)

@@ -40,7 +40,7 @@ namespace Intel.RealSense
                 {
                     using (var vf = f.As<VideoFrame>())
                         vf.CopyTo(depth);
-                    
+
                     int b = 0;
                     for (int y = 0; y < 480; ++y)
                     {

@@ -43,6 +43,6 @@ add_custom_target(pyrealsense2_docs ALL
 		-d "${SPHINX_CACHE_DIR}"
 		"${CMAKE_CURRENT_SOURCE_DIR}"
 		"${SPHINX_HTML_DIR}"
-	COMMENT "Building HTML documentation for pyrealsense2-framos with Sphinx")
+	COMMENT "Building HTML documentation for pyrealsense2 with Sphinx")
 
-add_dependencies(pyrealsense2_docs pyrealsense2-framos)
+add_dependencies(pyrealsense2_docs pyrealsense2)

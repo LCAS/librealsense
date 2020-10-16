@@ -8,21 +8,21 @@
 
 using namespace librealsense;
 
-std::shared_ptr<matcher> matcher_factory::create(rs2_matchers matcher, std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create(rs2_matchers matcher, std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     switch (matcher)
     {
     case RS2_MATCHER_DI:
-        return create_DI_matcher(profiles);
+        return create_DI_matcher(profiles, syncer_mode);
     case RS2_MATCHER_DI_C:
-        return create_DI_C_matcher(profiles);
+        return create_DI_C_matcher(profiles, syncer_mode);
     case RS2_MATCHER_DLR_C:
-        return create_DLR_C_matcher(profiles);
+        return create_DLR_C_matcher(profiles, syncer_mode);
     case RS2_MATCHER_DLR:
-        return create_DLR_matcher(profiles);
+        return create_DLR_matcher(profiles, syncer_mode);
     case RS2_MATCHER_DEFAULT:default:
         LOG_DEBUG("Created default matcher");
-        return create_timestamp_matcher(profiles);
+        return create_timestamp_matcher(profiles, syncer_mode);
         break;
     }
 }
@@ -39,33 +39,33 @@ stream_interface* librealsense::find_profile(rs2_stream stream, int index, std::
         return nullptr;
 }
 
-std::shared_ptr<matcher> matcher_factory::create_DLR_C_matcher(std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create_DLR_C_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     auto color  = find_profile(RS2_STREAM_COLOR, 0, profiles);
     if (!color)
     {
         LOG_DEBUG("Created default matcher");
-        return create_timestamp_matcher(profiles);
+        return create_timestamp_matcher(profiles, syncer_mode);
     }
 
     return create_timestamp_composite_matcher({ create_DLR_matcher(profiles),
-        create_identity_matcher(color) });
+        create_identity_matcher(color) }, syncer_mode);
 }
 
-std::shared_ptr<matcher> matcher_factory::create_DI_C_matcher(std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create_DI_C_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     auto color = find_profile(RS2_STREAM_COLOR, 0, profiles);
     if (!color)
     {
         LOG_DEBUG("Created default matcher");
-        return create_timestamp_matcher(profiles);
+        return create_timestamp_matcher(profiles, syncer_mode);
     }
 
     return create_timestamp_composite_matcher({ create_DI_matcher(profiles),
-        create_identity_matcher(profiles[2]) });
+        create_identity_matcher(profiles[2]) }, syncer_mode);
 }
 
-std::shared_ptr<matcher> matcher_factory::create_DLR_matcher(std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create_DLR_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     auto depth = find_profile(RS2_STREAM_DEPTH, 0, profiles);
     auto left = find_profile(RS2_STREAM_INFRARED, 1, profiles);
@@ -74,12 +74,12 @@ std::shared_ptr<matcher> matcher_factory::create_DLR_matcher(std::vector<stream_
     if (!depth || !left || !right)
     {
         LOG_DEBUG("Created default matcher");
-        return create_timestamp_matcher(profiles);
+        return create_timestamp_matcher(profiles, syncer_mode);
     }
     return create_frame_number_matcher({ depth , left , right });
 }
 
-std::shared_ptr<matcher> matcher_factory::create_DI_matcher(std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create_DI_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     auto depth = find_profile(RS2_STREAM_DEPTH, 0, profiles);
     auto ir = find_profile(RS2_STREAM_INFRARED, 1, profiles);
@@ -87,7 +87,7 @@ std::shared_ptr<matcher> matcher_factory::create_DI_matcher(std::vector<stream_i
     if (!depth || !ir)
     {
         LOG_DEBUG("Created default matcher");
-        return create_timestamp_matcher(profiles);
+        return create_timestamp_matcher(profiles, syncer_mode);
     }
     return create_frame_number_matcher({ depth , ir });
 }
@@ -100,13 +100,13 @@ std::shared_ptr<matcher> matcher_factory::create_frame_number_matcher(std::vecto
 
     return create_frame_number_composite_matcher(matchers);
 }
-std::shared_ptr<matcher> matcher_factory::create_timestamp_matcher(std::vector<stream_interface*> profiles)
+std::shared_ptr<matcher> matcher_factory::create_timestamp_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode)
 {
     std::vector<std::shared_ptr<matcher>> matchers;
     for (auto& p : profiles)
         matchers.push_back(std::make_shared<identity_matcher>(p->get_unique_id(), p->get_stream_type()));
 
-    return create_timestamp_composite_matcher(matchers);
+    return create_timestamp_composite_matcher(matchers, syncer_mode);
 }
 
 std::shared_ptr<matcher> matcher_factory::create_identity_matcher(stream_interface *profile)
@@ -118,9 +118,9 @@ std::shared_ptr<matcher> matcher_factory::create_frame_number_composite_matcher(
 {
     return std::make_shared<frame_number_composite_matcher>(matchers);
 }
-std::shared_ptr<matcher> matcher_factory::create_timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers)
+std::shared_ptr<matcher> matcher_factory::create_timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, rs2_syncer_mode syncer_mode)
 {
-    return std::make_shared<timestamp_composite_matcher>(matchers);
+    return std::make_shared<timestamp_composite_matcher>(matchers, syncer_mode);
 }
 
 device::device(std::shared_ptr<context> ctx,

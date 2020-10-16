@@ -19,9 +19,10 @@ namespace librealsense
             std::vector<int> _streams_to_aggregate_ids;
             std::vector<int> _streams_to_sync_ids;
             std::atomic<bool> _accepting;
+            rs2_syncer_mode _syncer_mode;
             void handle_frame(frame_holder frame, synthetic_source_interface* source);
         public:
-            aggregator(const std::vector<int>& streams_to_aggregate, const std::vector<int>& streams_to_sync);
+            aggregator(const std::vector<int>& streams_to_aggregate, const std::vector<int>& streams_to_sync, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
             bool dequeue(frame_holder* item, unsigned int timeout_ms);
             bool try_dequeue(frame_holder* item);
             void start();

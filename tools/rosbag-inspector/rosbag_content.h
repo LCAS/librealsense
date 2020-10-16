@@ -5,8 +5,8 @@
 
 #include <string>
 
-#include "../../third-party/realsense-file/rosbag/rosbag_storage/include/rosbag/bag.h"
-#include "../../third-party/realsense-file/rosbag/rosbag_storage/include/rosbag/view.h"
+#include "../../third-party/realsense-file-framos/rosbag/rosbag_storage/include/rosbag/bag.h"
+#include "../../third-party/realsense-file-framos/rosbag/rosbag_storage/include/rosbag/view.h"
 
 #include "print_helpers.h"
 

@@ -333,6 +333,7 @@ namespace librealsense
             CASE(EXT_TRIGGER_SOURCE)
             CASE(SOFTWARE_TRIGGER_ALL_SENSORS)
             CASE(USER_OUTPUT_LEVEL)
+            CASE(LINE_DEBOUNCER_TIME)
         default: assert(!is_valid(value)); return UNKNOWN_VALUE;
         }
 #undef CASE
@@ -496,10 +497,23 @@ namespace librealsense
         switch (value)
         {
             CASE(DI)
-            CASE(DI_C)
-            CASE(DLR_C)
-            CASE(DLR)
+                CASE(DI_C)
+                CASE(DLR_C)
+                CASE(DLR)
+                CASE(DEFAULT)
+        default: assert(!is_valid(value)); return UNKNOWN_VALUE;
+        }
+
+#undef CASE
+    }
+
+    const char* get_string(rs2_syncer_mode value)
+    {
+#define CASE(X) STRCASE(SYNCER_MODE, X)
+        switch (value)
+        {
             CASE(DEFAULT)
+            CASE(WAIT_FRAMESET)
         default: assert(!is_valid(value)); return UNKNOWN_VALUE;
         }
 

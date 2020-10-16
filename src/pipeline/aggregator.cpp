@@ -9,12 +9,13 @@ namespace librealsense
 {
     namespace pipeline
     {
-        aggregator::aggregator(const std::vector<int>& streams_to_aggregate, const std::vector<int>& streams_to_sync) :
+        aggregator::aggregator(const std::vector<int>& streams_to_aggregate, const std::vector<int>& streams_to_sync, rs2_syncer_mode syncer_mode) :
             processing_block("aggregator"),
             _queue(new single_consumer_frame_queue<frame_holder>(1)),
             _streams_to_aggregate_ids(streams_to_aggregate),
             _streams_to_sync_ids(streams_to_sync),
-            _accepting(true)
+            _accepting(true),
+            _syncer_mode(syncer_mode)
         {
             auto processing_callback = [&](frame_holder frame, synthetic_source_interface* source)
             {

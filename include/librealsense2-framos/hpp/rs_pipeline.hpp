@@ -211,6 +211,18 @@ namespace rs2
         }
 
         /**
+        * Configure syncer mode.
+        *
+        * \param[in] syncer_mode    Syncer mode to be configured
+        */
+        void set_syncer_mode(rs2_syncer_mode syncer_mode)
+        {
+            rs2_error* e = nullptr;
+            rs2_config_set_syncer_mode(_config.get(), syncer_mode, &e);
+            error::handle(e);
+        }
+
+        /**
         * Enable all device streams explicitly.
         * The conditions and behavior of this method are similar to those of \c enable_stream().
         * This filter enables all raw streams of the selected device. The device is either selected explicitly by the

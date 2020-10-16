@@ -71,6 +71,7 @@ namespace librealsense
             case RS2_OPTION_PACKET_SIZE: return "Packet size";
             case RS2_OPTION_ASIC_TEMPERATURE: return "Current Asic Temperature (degree celsius)";
             case RS2_OPTION_PROJECTOR_TEMPERATURE: return "Current Projector Temperature (degree celsius)";
+            case RS2_OPTION_LINE_DEBOUNCER_TIME: return "Line Debouncer time (microseconds)";
             default: return _ep.get_option_name(_id);
         }
     }

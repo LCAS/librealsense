@@ -62,7 +62,7 @@ set_property(SOURCE App.xaml PROPERTY VS_XAML_TYPE "ApplicationDefinition")
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "v${DOTNET_VERSION_LIBRARY}")
 
-add_dependencies(${PROJECT_NAME} realsense2-framos)
+add_dependencies(${PROJECT_NAME} realsense2)
 
 set_target_properties (${PROJECT_NAME} PROPERTIES
     FOLDER Wrappers/csharp
@@ -77,7 +77,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE /define:${CMAKE_SYSTEM_NAME})
 set_source_files_properties(stylecop.json PROPERTIES VS_TOOL_OVERRIDE "AdditionalFiles")
 
 install(TARGETS ${PROJECT_NAME}
-    EXPORT realsense2-framosTargets
+    EXPORT realsense2Targets
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     #LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     #ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

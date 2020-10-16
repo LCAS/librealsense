@@ -8,6 +8,8 @@ Ubuntu 16.04 x86_64
 
 Ubuntu 18.04 x86_64
 
+Ubuntu 20.04 x86_64
+
 Ubuntu 18.04 ARM64
 
 ## Prerequisites
@@ -36,7 +38,7 @@ sudo apt update
 
 ### Install the ROS distribution
 
-Install ROS Kinetic on Ubuntu 16 and ROS Melodic on Ubuntu 18. See the [ROS Kinetic wiki](http://wiki.ros.org/kinetic/Installation/Ubuntu) and [ROS Melodic wiki](http://wiki.ros.org/melodic/Installation/Ubuntu) for details.
+Install ROS Kinetic on Ubuntu 16, ROS Melodic on Ubuntu 18 or ROS Noetic on Ubuntu 20. See the [ROS Kinetic wiki](http://wiki.ros.org/kinetic/Installation/Ubuntu), [ROS Melodic wiki](http://wiki.ros.org/melodic/Installation/Ubuntu) or [ROS Noetic wiki](http://wiki.ros.org/noetic/Installation/Ubuntu) for details.
 
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -70,12 +72,22 @@ echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+### Install ROS Noetic on Ubuntu 20:
+
+```
+sudo apt-get install ros-noetic-desktop-full ros-noetic-ddynamic-reconfigure -y
+sudo rosdep init
+rosdep update
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
 ### Install Intel® RealSense™ ROS from Sources
 
 ```
 mkdir -p ~/catkin_ws/src/realsense-ros
 cd ~/catkin_ws/src/realsense-ros
-cp -r /usr/src/librealsense2-framos/wrappers/ros/. .
+cp -r /usr/src/librealsense2/wrappers/ros/. .
 cd ..
 catkin_init_workspace
 ```

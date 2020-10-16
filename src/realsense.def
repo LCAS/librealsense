@@ -16,6 +16,8 @@ EXPORTS
     rs2_d400e_set_heartbeat_time
     rs2_d400e_get_heartbeat_time
 
+    rs2_d400e_toggle_device_diagnostics
+
     rs2_query_devices
     rs2_query_devices_ex
     rs2_get_device_count
@@ -134,6 +136,7 @@ EXPORTS
     rs2_timestamp_domain_to_string
     rs2_sr300_visual_preset_to_string
     rs2_notification_category_to_string
+    rs2_syncer_mode_to_string
 
     rs2_log_to_console
     rs2_log_to_file
@@ -290,6 +293,7 @@ EXPORTS
     rs2_config_disable_all_streams
     rs2_config_resolve
     rs2_config_can_resolve
+    rs2_config_set_syncer_mode
 
     rs2_create_device_hub
     rs2_device_hub_is_device_connected
