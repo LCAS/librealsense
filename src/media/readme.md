@@ -339,7 +339,7 @@ There are two parts to a .msg file: fields and constants. Fields are the data th
 
 #### RealSense Proprietary  Messages
 
-In addition to the standard ROS messsages, the SDK writes additional proprietary messages (available in the [3rd party folder](../../third-party/realsense-file/rosbag/msgs/realsense_msgs)) for new data types that are recorded.
+In addition to the standard ROS messsages, the SDK writes additional proprietary messages (available in the [3rd party folder](../../third-party/realsense-file-framos/rosbag/msgs/realsense_msgs)) for new data types that are recorded.
 The following are the new messages created by the SDK:
 
  - [realsense_msgs::StreamInfo](#stream-info)

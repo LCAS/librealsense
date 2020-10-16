@@ -1,6 +1,6 @@
 #include "RealSenseDevice.h"
 #include "PCH.h"
-#include <librealsense2-framos/rs_advanced_mode.hpp>
+#include <librealsense2/rs_advanced_mode.hpp>
 
 URealSenseDevice::URealSenseDevice(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {

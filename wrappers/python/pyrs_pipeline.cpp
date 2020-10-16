@@ -46,6 +46,7 @@ void init_pipeline(py::module &m) {
              "Upon calling resolve(), the config checks for conflicts between the application configuration requests and the attached computer vision "
              "modules and processing blocks requirements, and fails if conflicts are found.\n"
              "Before resolve() is called, no conflict check is done.", "stream_type"_a, "stream_index"_a, "width"_a, "height"_a, "format"_a = RS2_FORMAT_ANY, "framerate"_a = 0)
+        .def("set_syncer_mode", (void (rs2::config::*)(rs2_syncer_mode))& rs2::config::set_syncer_mode, "Configure syncer synchronization working mode", "syncer_mode"_a)
         .def("enable_stream", (void (rs2::config::*)(rs2_stream, int)) &rs2::config::enable_stream, "Stream type and possibly also stream index. Other parameters are resolved internally.", "stream_type"_a, "stream_index"_a = -1)
         .def("enable_stream", (void (rs2::config::*)(rs2_stream, rs2_format, int))&rs2::config::enable_stream, "Stream type and format, and possibly frame rate. Other parameters are resolved internally.", "stream_type"_a, "format"_a, "framerate"_a = 0)
         .def("enable_stream", (void (rs2::config::*)(rs2_stream, int, int, rs2_format, int)) &rs2::config::enable_stream, "Stream type and resolution, and possibly format and frame rate. Other parameters are resolved internally.", "stream_type"_a, "width"_a, "height"_a, "format"_a = RS2_FORMAT_ANY, "framerate"_a = 0)

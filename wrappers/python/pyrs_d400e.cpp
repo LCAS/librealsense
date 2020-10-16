@@ -11,5 +11,6 @@ void init_d400e(py::module& m) {
     d400e_submodule.def("get_heartbeat_time", &rs2::d400e::get_heartbeat_time, "retrieve heartbeat time for d400e devices");
     d400e_submodule.def("set_buffer_count", &rs2::d400e::set_buffer_count, "set number of buffers for d400e devices");
     d400e_submodule.def("get_buffer_count", &rs2::d400e::get_buffer_count, "get number of buffers for d400e devices");
+    d400e_submodule.def("toggle_device_diagnostics", &rs2::d400e::toggle_device_diagnostics, "enable or disable diagnostics feature for d400e devices");
     /** end rs_d400e.hpp **/
 }

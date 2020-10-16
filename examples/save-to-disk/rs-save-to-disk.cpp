@@ -44,25 +44,25 @@ int main(int argc, char * argv[]) try
             std::stringstream png_file;
             png_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name() << ".png";
             stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(),
-                           vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
+                vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
             std::cout << "Saved " << png_file.str() << std::endl;
 
             // Record per-frame metadata for UVC streams
             std::stringstream csv_file;
             csv_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name()
-                     << "-metadata.csv";
+                << "-metadata.csv";
             metadata_to_csv(vf, csv_file.str());
         }
     }
 
     return EXIT_SUCCESS;
 }
-catch(const rs2::error & e)
+catch (const rs2::error & e)
 {
     std::cerr << "RealSense error calling " << e.get_failed_function() << "(" << e.get_failed_args() << "):\n    " << e.what() << std::endl;
     return EXIT_FAILURE;
 }
-catch(const std::exception & e)
+catch (const std::exception & e)
 {
     std::cerr << e.what() << std::endl;
     return EXIT_FAILURE;

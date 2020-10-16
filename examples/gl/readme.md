@@ -15,7 +15,7 @@ The application should open a window with a pointcloud. Using your mouse, you sh
 
 ## Code Overview
 
-In addition to core `realsense2` this example also depends on an auxiliary `realsense2-framos-gl` library. 
+In addition to core `realsense2-framos` this example also depends on an auxiliary `realsense2-framos-gl` library. 
 This is not strictly part of core RealSense functionality, but rather a useful extension.
 
 ### Setup

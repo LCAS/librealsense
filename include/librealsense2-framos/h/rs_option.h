@@ -98,6 +98,7 @@ extern "C" {
         RS2_OPTION_EXT_TRIGGER_SOURCE, /**Select external trigger type for eth cameras*/
         RS2_OPTION_SOFTWARE_TRIGGER, /**< Execute software trigger for eth cameras*/
         RS2_OPTION_SOFTWARE_TRIGGER_ALL_SENSORS, /**< Execute software trigger for eth cameras*/
+        RS2_OPTION_LINE_DEBOUNCER_TIME, /**< Line debouncer time (microseconds) for eth cameras*/
         RS2_OPTION_COUNT /**< Number of enumeration values. Not a valid input: intended to be used in for-loops. */
     } rs2_option;
 

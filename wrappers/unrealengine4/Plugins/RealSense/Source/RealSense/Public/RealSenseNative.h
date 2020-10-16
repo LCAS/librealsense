@@ -4,7 +4,7 @@
 #pragma warning(disable: 4456)
 #pragma warning(disable: 4458)
 #pragma warning(disable: 4577)
-#include <librealsense2-framos/rs.hpp>
+#include <librealsense2/rs.hpp>
 #pragma warning(pop)
 
 namespace rs2 {

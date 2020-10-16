@@ -24,20 +24,22 @@ namespace librealsense
     class matcher_factory
     {
     public:
-        static std::shared_ptr<matcher> create(rs2_matchers matcher, std::vector<stream_interface*> profiles);
+        static std::shared_ptr<matcher> create(rs2_matchers matcher, std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
 
     private:
-        static std::shared_ptr<matcher> create_DLR_C_matcher(std::vector<stream_interface*> profiles);
-        static std::shared_ptr<matcher> create_DLR_matcher(std::vector<stream_interface*> profiles);
-        static std::shared_ptr<matcher> create_DI_C_matcher(std::vector<stream_interface*> profiles);
-        static std::shared_ptr<matcher> create_DI_matcher(std::vector<stream_interface*> profiles);
+        static std::shared_ptr<matcher> create_DLR_C_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
+        static std::shared_ptr<matcher> create_DLR_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
+        static std::shared_ptr<matcher> create_DI_C_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
+        static std::shared_ptr<matcher> create_DI_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
 
         static std::shared_ptr<matcher> create_identity_matcher(stream_interface* profiles);
         static std::shared_ptr<matcher> create_frame_number_matcher(std::vector<stream_interface*> profiles);
-        static std::shared_ptr<matcher> create_timestamp_matcher(std::vector<stream_interface*> profiles);
+        static std::shared_ptr<matcher> create_timestamp_matcher(std::vector<stream_interface*> profiles, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
 
-        static std::shared_ptr<matcher> create_timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers);
+        static std::shared_ptr<matcher> create_timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
         static std::shared_ptr<matcher> create_frame_number_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers);
+    private: 
+        rs2_syncer_mode _syncer_mode;
     };
 
     class device : public virtual device_interface, public info_container

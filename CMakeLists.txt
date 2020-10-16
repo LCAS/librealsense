@@ -34,6 +34,15 @@ include(CMake/global_config.cmake)
 # include librealsense camerasuite configuration
 include(CMake/camera_suite.cmake)
 
+# include dynamic calibrator
+include(CMake/dynamic_calibrator.cmake)
+
+#include ROS wrapper
+include(CMake/ros_wrapper.cmake)
+
+#include ROS2 wrapper
+include(CMake/ros2_wrapper.cmake)
+
 config_cxx_flags()
 # include os specific macros
 # macro definition located at "CMake/global_config.cmake"
@@ -72,13 +81,6 @@ global_target_config()
 # macro definition located at "CMake/camera_suite.cmake"
 add_camerasuite(${LRS_TARGET})
 
-include(install_options.cmake OPTIONAL)
-if(INSTALL_DYNAMIC_CALIBRATOR)
-    include(install_dynamic_calibrator.cmake)
-endif()
-if(INSTALL_ROS_WRAPPER)
-    include(install_ros_wrapper.cmake)
-endif()
 include(CMake/install_config.cmake)
 
 add_subdirectory(wrappers)

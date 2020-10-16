@@ -46,6 +46,15 @@ void rs2_d400e_set_buffer_count(int buffer_count, rs2_error** error);
 */
 int rs2_d400e_get_buffer_count(rs2_error** error);
 
+/**
+* Enable or disable diagnostic packets sent by D400e series devices.
+* \param       dev_serial   Serial number of a device on which diagnostic feature have to be toggled
+* \param       toggle       1 - to enable device diagnostics feature, 0 - to disable device diagnostics feature
+* \param[out]  error        If non-null, receives any error that occurs during this call, otherwise, errors are ignored
+* @return                   0 on success, 1 on failure
+*/
+int rs2_d400e_toggle_device_diagnostics(const char* dev_serial, int toggle, rs2_error** error);
+
 #ifdef __cplusplus
 }
 #endif

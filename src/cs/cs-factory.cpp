@@ -125,8 +125,8 @@ namespace librealsense {
 
     std::shared_ptr<matcher> d400e_camera::create_matcher(const frame_holder& frame) const
     {
-        std::vector<stream_interface*> streams = {_depth_stream.get(), _left_ir_stream.get() , _right_ir_stream.get(), _color_stream.get()};
-        return matcher_factory::create(RS2_MATCHER_DEFAULT, streams);
+        std::vector<stream_interface*> streams = { _depth_stream.get(), _left_ir_stream.get() , _right_ir_stream.get(), _color_stream.get() };
+        return matcher_factory::create(RS2_MATCHER_DEFAULT, streams, _syncer_mode);
     }
 
     std::vector<tagged_profile> d400e_camera::get_profiles_tags() const

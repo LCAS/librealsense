@@ -19,7 +19,7 @@ namespace librealsense
     class syncer_process_unit : public processing_block
     {
     public:
-        syncer_process_unit(std::shared_ptr<bool_option> is_enabled_opt = nullptr);
+        syncer_process_unit(std::shared_ptr<bool_option> is_enabled_opt = nullptr, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT, std::vector<std::shared_ptr<matcher>> matchers = {});
 
         ~syncer_process_unit()
         {

@@ -112,7 +112,7 @@ namespace librealsense
     class composite_matcher : public matcher
     {
     public:
-        composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, std::string name);
+        composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, std::string name, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
 
 
         virtual bool are_equivalent(frame_holder& a, frame_holder& b) = 0;
@@ -133,13 +133,14 @@ namespace librealsense
         std::map<stream_id, std::shared_ptr<matcher>> _matchers;
         std::map<matcher*, double> _next_expected;
         std::map<matcher*, rs2_timestamp_domain> _next_expected_domain;
+        rs2_syncer_mode _syncer_mode;
     };
 
     // composite matcher that does not synchronize between any frames, and instead just passes them on to callback
     class composite_identity_matcher : public composite_matcher
     {
     public:
-        composite_identity_matcher(std::vector<std::shared_ptr<matcher>> matchers);
+        composite_identity_matcher(std::vector<std::shared_ptr<matcher>> matchers, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
 
         void sync(frame_holder f, syncronization_environment env) override;
         virtual bool are_equivalent(frame_holder& a, frame_holder& b) { return false; }
@@ -155,7 +156,7 @@ namespace librealsense
     class frame_number_composite_matcher : public composite_matcher
     {
     public:
-        frame_number_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers);
+        frame_number_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
         virtual void update_last_arrived(frame_holder& f, matcher* m) override;
         bool are_equivalent(frame_holder& a, frame_holder& b) override;
         bool is_smaller_than(frame_holder& a, frame_holder& b) override;
@@ -170,13 +171,13 @@ namespace librealsense
     class timestamp_composite_matcher : public composite_matcher
     {
     public:
-        timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers);
+        timestamp_composite_matcher(std::vector<std::shared_ptr<matcher>> matchers, rs2_syncer_mode syncer_mode = RS2_SYNCER_MODE_DEFAULT);
         bool are_equivalent(frame_holder& a, frame_holder& b) override;
         bool is_smaller_than(frame_holder& a, frame_holder& b) override;
         virtual void update_last_arrived(frame_holder& f, matcher* m) override;
         void clean_inactive_streams(frame_holder& f) override;
         bool skip_missing_stream(std::vector<matcher*> synced, matcher* missing) override;
-        void update_next_expected(const frame_holder & f) override;
+        void update_next_expected(const frame_holder& f) override;
 
     private:
         unsigned int get_fps(const frame_holder & f);

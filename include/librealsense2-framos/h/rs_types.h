@@ -212,54 +212,63 @@ typedef enum rs2_matchers
    RS2_MATCHER_COUNT
 }rs2_matchers;
 
-typedef struct rs2_device_info rs2_device_info;
-typedef struct rs2_device rs2_device;
-typedef struct rs2_error rs2_error;
-typedef struct rs2_log_message rs2_log_message;
-typedef struct rs2_raw_data_buffer rs2_raw_data_buffer;
-typedef struct rs2_frame rs2_frame;
-typedef struct rs2_frame_queue rs2_frame_queue;
-typedef struct rs2_pipeline rs2_pipeline;
-typedef struct rs2_pipeline_profile rs2_pipeline_profile;
-typedef struct rs2_config rs2_config;
-typedef struct rs2_device_list rs2_device_list;
-typedef struct rs2_stream_profile_list rs2_stream_profile_list;
-typedef struct rs2_processing_block_list rs2_processing_block_list;
-typedef struct rs2_stream_profile rs2_stream_profile;
-typedef struct rs2_frame_callback rs2_frame_callback;
-typedef struct rs2_log_callback rs2_log_callback;
-typedef struct rs2_syncer rs2_syncer;
-typedef struct rs2_device_serializer rs2_device_serializer;
-typedef struct rs2_source rs2_source;
-typedef struct rs2_processing_block rs2_processing_block;
-typedef struct rs2_frame_processor_callback rs2_frame_processor_callback;
-typedef struct rs2_playback_status_changed_callback rs2_playback_status_changed_callback;
-typedef struct rs2_update_progress_callback rs2_update_progress_callback;
-typedef struct rs2_context rs2_context;
-typedef struct rs2_device_hub rs2_device_hub;
-typedef struct rs2_sensor_list rs2_sensor_list;
-typedef struct rs2_sensor rs2_sensor;
-typedef struct rs2_options rs2_options;
-typedef struct rs2_options_list rs2_options_list;
-typedef struct rs2_devices_changed_callback rs2_devices_changed_callback;
-typedef struct rs2_notification rs2_notification;
-typedef struct rs2_notifications_callback rs2_notifications_callback;
-typedef void (*rs2_log_callback_ptr)(rs2_log_severity, rs2_log_message const *, void * arg);
-typedef void (*rs2_notification_callback_ptr)(rs2_notification*, void*);
-typedef void (*rs2_devices_changed_callback_ptr)(rs2_device_list*, rs2_device_list*, void*);
-typedef void (*rs2_frame_callback_ptr)(rs2_frame*, void*);
-typedef void (*rs2_frame_processor_callback_ptr)(rs2_frame*, rs2_source*, void*);
-typedef void(*rs2_update_progress_callback_ptr)(const float, void*);
+/** \brief Specifies types of syncer configurations */
+typedef enum rs2_syncer_mode
+{
+    RS2_SYNCER_MODE_DEFAULT,           //default syncer configuration
+    RS2_SYNCER_MODE_WAIT_FRAMESET,     //syncer waits for full frameset (otherwise returns timeout)
+    RS2_SYNCER_MODE_COUNT
+}rs2_syncer_mode;
+const char* rs2_syncer_mode_to_string(rs2_syncer_mode syncer_mode);
 
-typedef double      rs2_time_t;     /**< Timestamp format. units are milliseconds */
-typedef long long   rs2_metadata_type; /**< Metadata attribute type is defined as 64 bit signed integer*/
+    typedef struct rs2_device_info rs2_device_info;
+    typedef struct rs2_device rs2_device;
+    typedef struct rs2_error rs2_error;
+    typedef struct rs2_log_message rs2_log_message;
+    typedef struct rs2_raw_data_buffer rs2_raw_data_buffer;
+    typedef struct rs2_frame rs2_frame;
+    typedef struct rs2_frame_queue rs2_frame_queue;
+    typedef struct rs2_pipeline rs2_pipeline;
+    typedef struct rs2_pipeline_profile rs2_pipeline_profile;
+    typedef struct rs2_config rs2_config;
+    typedef struct rs2_device_list rs2_device_list;
+    typedef struct rs2_stream_profile_list rs2_stream_profile_list;
+    typedef struct rs2_processing_block_list rs2_processing_block_list;
+    typedef struct rs2_stream_profile rs2_stream_profile;
+    typedef struct rs2_frame_callback rs2_frame_callback;
+    typedef struct rs2_log_callback rs2_log_callback;
+    typedef struct rs2_syncer rs2_syncer;
+    typedef struct rs2_device_serializer rs2_device_serializer;
+    typedef struct rs2_source rs2_source;
+    typedef struct rs2_processing_block rs2_processing_block;
+    typedef struct rs2_frame_processor_callback rs2_frame_processor_callback;
+    typedef struct rs2_playback_status_changed_callback rs2_playback_status_changed_callback;
+    typedef struct rs2_update_progress_callback rs2_update_progress_callback;
+    typedef struct rs2_context rs2_context;
+    typedef struct rs2_device_hub rs2_device_hub;
+    typedef struct rs2_sensor_list rs2_sensor_list;
+    typedef struct rs2_sensor rs2_sensor;
+    typedef struct rs2_options rs2_options;
+    typedef struct rs2_options_list rs2_options_list;
+    typedef struct rs2_devices_changed_callback rs2_devices_changed_callback;
+    typedef struct rs2_notification rs2_notification;
+    typedef struct rs2_notifications_callback rs2_notifications_callback;
+    typedef void (*rs2_log_callback_ptr)(rs2_log_severity, rs2_log_message const*, void* arg);
+    typedef void (*rs2_notification_callback_ptr)(rs2_notification*, void*);
+    typedef void (*rs2_devices_changed_callback_ptr)(rs2_device_list*, rs2_device_list*, void*);
+    typedef void (*rs2_frame_callback_ptr)(rs2_frame*, void*);
+    typedef void (*rs2_frame_processor_callback_ptr)(rs2_frame*, rs2_source*, void*);
+    typedef void(*rs2_update_progress_callback_ptr)(const float, void*);
 
-rs2_error * rs2_create_error(const char* what, const char* name, const char* args, rs2_exception_type type);
-rs2_exception_type rs2_get_librealsense_exception_type(const rs2_error* error);
-const char* rs2_get_failed_function            (const rs2_error* error);
-const char* rs2_get_failed_args                (const rs2_error* error);
-const char* rs2_get_error_message              (const rs2_error* error);
-void        rs2_free_error                     (rs2_error* error);
+    typedef double      rs2_time_t;     /**< Timestamp format. units are milliseconds */
+    typedef long long   rs2_metadata_type; /**< Metadata attribute type is defined as 64 bit signed integer*/
+
+    rs2_error* rs2_create_error(const char* what, const char* name, const char* args, rs2_exception_type type);
+    rs2_exception_type rs2_get_librealsense_exception_type(const rs2_error* error);
+    const char* rs2_get_failed_function(const rs2_error* error);
+    const char* rs2_get_failed_args(const rs2_error* error);
+    const char* rs2_get_error_message(const rs2_error* error);
+    void        rs2_free_error(rs2_error* error);
 
 #ifdef __cplusplus
 }

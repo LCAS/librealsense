@@ -33,7 +33,7 @@ rs2_processing_block* rs2_create_colorizer(rs2_error** error);
 * Syncronization is done (mostly) based on timestamps so good hardware timestamps are a pre-condition
 * \param[out] error  if non-null, receives any error that occurs during this call, otherwise, errors are ignored
 */
-rs2_processing_block* rs2_create_sync_processing_block(rs2_error** error);
+rs2_processing_block* rs2_create_sync_processing_block(rs2_syncer_mode syncer_mode, rs2_error** error);
 
 /**
 * Creates Point-Cloud processing block. This block accepts depth frames and outputs Points frames

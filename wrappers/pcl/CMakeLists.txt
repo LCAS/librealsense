@@ -11,7 +11,7 @@ if (PCL_FOUND)
   link_directories(${PCL_LIBRARY_DIRS})
 endif()
 
-set(DEPENDENCIES realsense2-framos ${PCL_LIBRARIES})
+set(DEPENDENCIES realsense2 ${PCL_LIBRARIES})
 
 find_package(OpenGL)
 if(NOT OPENGL_FOUND)

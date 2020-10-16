@@ -2,7 +2,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/rgbd/kinfu.hpp>
 
-#include <librealsense2-framos/rs.hpp> // Include RealSense Cross Platform API
+#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 #include <example.hpp>         // Include short list of convenience functions for rendering
 
 #include <thread>

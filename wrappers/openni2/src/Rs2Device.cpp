@@ -1,6 +1,6 @@
 #include "Rs2Driver.h"
 #include "Rs2Commands.h"
-#include <librealsense2-framos/rsutil.h>
+#include <librealsense2/rsutil.h>
 
 #define WORKER_THREAD_IDLE_MS 500
 #define WORKER_THREAD_STOP_TIMEOUT_MS 5000

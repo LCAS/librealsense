@@ -63,7 +63,7 @@ void config_file::save(const char* filename)
     json j;
     for(auto kvp : _values)
     {
-        j[kvp.first] = kvp.second; 
+        j[kvp.first.c_str()] = kvp.second; 
     }
     std::string s = j.dump(2);
     try

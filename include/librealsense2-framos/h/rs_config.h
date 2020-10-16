@@ -68,6 +68,16 @@ extern "C" {
         rs2_format format,
         int framerate,
         rs2_error** error);
+    /**
+    * Configure pipeline behavior, with selected pipe parameters.
+    *
+    * \param[in] config         A pointer to an instance of a config
+    * \param[in] syncer_mode    Pipe configuration - wait for full frameset or default behavior
+    * \param[out] error  if non-null, receives any error that occurs during this call, otherwise, errors are ignored
+    */
+    void rs2_config_set_syncer_mode(rs2_config* config,
+        rs2_syncer_mode syncer_mode,
+        rs2_error** error);
 
     /**
     * Enable all device streams explicitly.

@@ -30,6 +30,9 @@ namespace librealsense
             bool can_resolve(std::shared_ptr<pipeline> pipe);
             bool get_repeat_playback();
 
+            void set_syncer_mode(rs2_syncer_mode syncer_mode) { _syncer_mode = syncer_mode; };
+            rs2_syncer_mode get_syncer_mode() { return _syncer_mode; };
+
             //Non top level API
             std::shared_ptr<profile> get_cached_resolved_profile();
 
@@ -41,6 +44,7 @@ namespace librealsense
                 _stream_requests = other._stream_requests;
                 _resolved_profile = nullptr;
                 _playback_loop = other._playback_loop;
+                _syncer_mode = other._syncer_mode;
             }
         private:
             struct device_request
@@ -60,6 +64,7 @@ namespace librealsense
             bool _enable_all_streams = false;
             std::shared_ptr<profile> _resolved_profile;
             bool _playback_loop;
+            rs2_syncer_mode _syncer_mode = RS2_SYNCER_MODE_DEFAULT;
         };
     }
 }

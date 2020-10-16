@@ -10,7 +10,7 @@ project(RealsenseNodeJSWrappers)
 add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/build/Release/node_librealsense.node
     COMMAND env GYP_DEFINES="vs_configuration=$<CONFIGURATION>" npm install
-    DEPENDS realsense2-framos index.js binding.gyp package.json src/addon.cpp
+    DEPENDS realsense2 index.js binding.gyp package.json src/addon.cpp
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
 )
 add_custom_target(
